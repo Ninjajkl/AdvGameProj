@@ -20,14 +20,14 @@ public struct BuildChunkJob : IJob
     /// </summary>
     public void Execute()
     {
-        for (int y = 0; y < Constants.MAX_HEIGHT; y++)//height
+        for (int y = 0; y < TerrainConstants.MAX_HEIGHT; y++)//height
         {
-            for (int z = 1; z < Constants.CHUNK_SIZE + 1; z++)//column, start at 1, because Z axis is inverted and need -1 as offset
+            for (int z = 1; z < TerrainConstants.CHUNK_SIZE + 1; z++)//column, start at 1, because Z axis is inverted and need -1 as offset
             {
-                for (int x = 0; x < Constants.CHUNK_SIZE; x++)//line 
+                for (int x = 0; x < TerrainConstants.CHUNK_SIZE; x++)//line 
                 {
                     NativeArray<float4> cube = new NativeArray<float4>(8,Allocator.Temp);
-                    int mat = Constants.NUMBER_MATERIALS;
+                    int mat = TerrainConstants.NUMBER_MATERIALS;
                     cube[0] = CalculateVertexChunk(x, y, z, ref mat);
                     cube[1] = CalculateVertexChunk(x + 1, y, z, ref mat);
                     cube[2] = CalculateVertexChunk(x + 1, y, z - 1, ref mat);
@@ -75,23 +75,23 @@ public struct BuildChunkJob : IJob
             const float uvOffset = 0.01f; //Small offset for avoid pick pixels of other textures
             //NEED REWORKING FOR CORRECT WORKING, now have problems with the directions of the uv
             if (i % 6 == 0)
-                uv.Add(new float2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + Constants.MATERIAL_SIZE - uvOffset,
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - uvOffset));
+                uv.Add(new float2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + TerrainConstants.MATERIAL_SIZE - uvOffset,
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - uvOffset));
             else if (i % 6 == 1)
-                uv.Add(new float2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + Constants.MATERIAL_SIZE - uvOffset,
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - Constants.MATERIAL_SIZE + uvOffset));
+                uv.Add(new float2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + TerrainConstants.MATERIAL_SIZE - uvOffset,
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - TerrainConstants.MATERIAL_SIZE + uvOffset));
             else if (i % 6 == 2)
-                uv.Add(new float2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + uvOffset,
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - uvOffset));
+                uv.Add(new float2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + uvOffset,
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - uvOffset));
             else if (i % 6 == 3)
-                uv.Add(new float2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW + uvOffset),
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - Constants.MATERIAL_SIZE + uvOffset));
+                uv.Add(new float2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW + uvOffset),
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - TerrainConstants.MATERIAL_SIZE + uvOffset));
             else if (i % 6 == 4)
-                uv.Add(new float2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + Constants.MATERIAL_SIZE - uvOffset,
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - Constants.MATERIAL_SIZE + uvOffset));
+                uv.Add(new float2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + TerrainConstants.MATERIAL_SIZE - uvOffset,
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - TerrainConstants.MATERIAL_SIZE + uvOffset));
             else if (i % 6 == 5)
-                uv.Add(new float2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + uvOffset,
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - uvOffset));
+                uv.Add(new float2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + uvOffset,
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - uvOffset));
 
 
         }
@@ -102,14 +102,14 @@ public struct BuildChunkJob : IJob
     /// </summary>
     private float4 CalculateVertexChunk(int x, int y, int z, ref int colorVoxel)
     {
-        int index = (x + z * Constants.CHUNK_VERTEX_SIZE + y * Constants.CHUNK_VERTEX_AREA) * Constants.CHUNK_POINT_BYTE;
+        int index = (x + z * TerrainConstants.CHUNK_VERTEX_SIZE + y * TerrainConstants.CHUNK_VERTEX_AREA) * TerrainConstants.CHUNK_POINT_BYTE;
         int material = chunkData[index + 1];
         if (chunkData[index] >= isoLevel && material < colorVoxel)
             colorVoxel = material;
         return new float4(
-            (x - Constants.CHUNK_SIZE / 2) * Constants.VOXEL_SIDE,
-            (y - Constants.MAX_HEIGHT / 2) * Constants.VOXEL_SIDE,
-            (z - Constants.CHUNK_SIZE / 2) * Constants.VOXEL_SIDE,
+            (x - TerrainConstants.CHUNK_SIZE / 2) * TerrainConstants.VOXEL_SIDE,
+            (y - TerrainConstants.MAX_HEIGHT / 2) * TerrainConstants.VOXEL_SIDE,
+            (z - TerrainConstants.CHUNK_SIZE / 2) * TerrainConstants.VOXEL_SIDE,
             chunkData[index]);
     }
 

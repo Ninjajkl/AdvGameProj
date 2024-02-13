@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Constants;
 
 public class Chunk : MonoBehaviour
 {
@@ -70,13 +71,32 @@ public class Chunk : MonoBehaviour
     /// </summary>
     public void removeTerrain(Vector3 vertexPoint, int modification)
     {
-        int byteIndex = ((int)vertexPoint.x + (int)vertexPoint.z * Constants.CHUNK_VERTEX_SIZE + (int)vertexPoint.y * Constants.CHUNK_VERTEX_AREA) * Constants.CHUNK_POINT_BYTE;
+        int byteIndex = ((int)vertexPoint.x + (int)vertexPoint.z * TerrainConstants.CHUNK_VERTEX_SIZE + (int)vertexPoint.y * TerrainConstants.CHUNK_VERTEX_AREA) * TerrainConstants.CHUNK_POINT_BYTE;
 
         int value = data[byteIndex];
+        int matVal = data[byteIndex + 1];
         int newValue = Mathf.Clamp(value + modification, 0, 255);
 
         if (value == newValue)
             return;
+
+        if(ChunkManager.Instance.editorMode == true)
+        {
+            // Can break bedrock, does not go to inventory
+        }
+        else
+        {
+            // If trying to break bedrock, don't
+            if (matVal == (int)MaterialEnum.Bedrock)
+            {
+                return;
+            }
+            // Add material to inventory otherwise
+            else
+            {
+                GameManager.Instance.Inventory[matVal] += 1;
+            }
+        }
 
         data[byteIndex] = (byte)newValue;
         modified = true; //Don't direct change because some vertex are modifier in the same editions, wait to next frame
@@ -88,7 +108,7 @@ public class Chunk : MonoBehaviour
     public void addTerrain(Vector3 vertexPoint,int modification, int mat)
     {
         int isoSurface = MeshBuilder.Instance.isoLevel;
-        int byteIndex = ((int)vertexPoint.x + (int)vertexPoint.z * Constants.CHUNK_VERTEX_SIZE + (int)vertexPoint.y * Constants.CHUNK_VERTEX_AREA) * Constants.CHUNK_POINT_BYTE ;
+        int byteIndex = ((int)vertexPoint.x + (int)vertexPoint.z * TerrainConstants.CHUNK_VERTEX_SIZE + (int)vertexPoint.y * TerrainConstants.CHUNK_VERTEX_AREA) * TerrainConstants.CHUNK_POINT_BYTE ;
 
         int value = data[byteIndex];
         int newValue = Mathf.Clamp(value + modification, 0, 255);
@@ -108,7 +128,7 @@ public class Chunk : MonoBehaviour
     /// </summary>
     public byte GetMaterial(Vector3 vertexPoint)
     {
-        int byteIndex = ((int)vertexPoint.x + (int)vertexPoint.z * Constants.CHUNK_VERTEX_SIZE + (int)vertexPoint.y * Constants.CHUNK_VERTEX_AREA) * Constants.CHUNK_POINT_BYTE;
+        int byteIndex = ((int)vertexPoint.x + (int)vertexPoint.z * TerrainConstants.CHUNK_VERTEX_SIZE + (int)vertexPoint.y * TerrainConstants.CHUNK_VERTEX_AREA) * TerrainConstants.CHUNK_POINT_BYTE;
         return data[byteIndex + 1];
     }
 
@@ -131,7 +151,7 @@ public class Chunk : MonoBehaviour
             Gizmos.color = Color.Lerp(Color.red, Color.magenta, ((transform.position.x + transform.position.z) % 100) / 100);
 
 
-            Gizmos.DrawWireCube(transform.position,new Vector3(Constants.CHUNK_SIDE, Constants.MAX_HEIGHT * Constants.VOXEL_SIDE, Constants.CHUNK_SIDE));
+            Gizmos.DrawWireCube(transform.position,new Vector3(TerrainConstants.CHUNK_SIDE, TerrainConstants.MAX_HEIGHT * TerrainConstants.VOXEL_SIDE, TerrainConstants.CHUNK_SIDE));
         }
     }
 #endif

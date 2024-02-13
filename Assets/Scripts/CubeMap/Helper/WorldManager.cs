@@ -10,7 +10,7 @@ public class WorldManager : Singleton<WorldManager>
     public const string WORLDS_DIRECTORY = "/worlds"; //Directory worlds (save folder, that contains the worlds folders)
     
 
-    private void Awake()
+    public override void Awake()
     {
         base.Awake();
         if (Instance == this)

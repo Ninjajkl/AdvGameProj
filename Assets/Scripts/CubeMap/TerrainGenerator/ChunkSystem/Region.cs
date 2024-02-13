@@ -24,7 +24,7 @@ public class Region
         regionZ = z;
         if (File.Exists(DirectionChunkFile()) && !ChunkManager.Instance.editorMode)
         {
-            if (Constants.REGION_SAVE_COMPRESSED)
+            if (TerrainConstants.REGION_SAVE_COMPRESSED)
             {
                 byte[] compressedRegion = File.ReadAllBytes(DirectionChunkFile());//Load compressed region
                 regionData = new List<byte>(CompressHelper.Decompress(compressedRegion));//Decompress the region data
@@ -32,7 +32,7 @@ public class Region
         }
         else if (File.Exists(StartingChunkFile()))
         {
-            if (Constants.REGION_SAVE_COMPRESSED)
+            if (TerrainConstants.REGION_SAVE_COMPRESSED)
             {
                 byte[] compressedRegion = File.ReadAllBytes(StartingChunkFile());//Load compressed region
                 regionData = new List<byte>(CompressHelper.Decompress(compressedRegion));//Decompress the region data
@@ -40,7 +40,7 @@ public class Region
         }
         else
         {
-            regionData = new List<byte>(new byte[Constants.REGION_LOOKTABLE_BYTES]);//Look table initialized, all 0
+            regionData = new List<byte>(new byte[TerrainConstants.REGION_LOOKTABLE_BYTES]);//Look table initialized, all 0
         }
     }
     
@@ -49,10 +49,10 @@ public class Region
     /// </summary>
     public byte[] GetChunkData(int index)
     {
-        int startPos = Constants.REGION_LOOKTABLE_BYTES + (index-1)*Constants.CHUNK_BYTES; // index-1 because the lookTable start at 1. LookTable position 10 = chunk data position 9.
-        byte[] chunk = new byte[Constants.CHUNK_BYTES];
+        int startPos = TerrainConstants.REGION_LOOKTABLE_BYTES + (index-1)*TerrainConstants.CHUNK_BYTES; // index-1 because the lookTable start at 1. LookTable position 10 = chunk data position 9.
+        byte[] chunk = new byte[TerrainConstants.CHUNK_BYTES];
 
-        for (int i = startPos, j = 0; i < (startPos + Constants.CHUNK_BYTES); i ++,j++)
+        for (int i = startPos, j = 0; i < (startPos + TerrainConstants.CHUNK_BYTES); i ++,j++)
         {
             chunk[j] = regionData[i];
         }
@@ -66,13 +66,13 @@ public class Region
     public int GetChunkIndex(int x, int z)
     {
 
-        int startPos = (x + z * Constants.REGION_SIZE) * Constants.REGION_LOOKTABLE_POS_BYTE + Constants.REGION_LOOKTABLE_POS_BYTE;
+        int startPos = (x + z * TerrainConstants.REGION_SIZE) * TerrainConstants.REGION_LOOKTABLE_POS_BYTE + TerrainConstants.REGION_LOOKTABLE_POS_BYTE;
         int index = 0;
 
-        for (int i = 0; i< Constants.REGION_LOOKTABLE_POS_BYTE; i++)
+        for (int i = 0; i< TerrainConstants.REGION_LOOKTABLE_POS_BYTE; i++)
         {
    
-            index |= regionData[startPos+ Constants.REGION_LOOKTABLE_POS_BYTE-i-1] << 8*i;
+            index |= regionData[startPos+ TerrainConstants.REGION_LOOKTABLE_POS_BYTE-i-1] << 8*i;
         }
 
         return index;
@@ -88,9 +88,9 @@ public class Region
         int chunksDataStartPos = GetChunkIndex(x,z); 
         if(chunksDataStartPos == 0)//Chunk no saved, assign a new position in the chunks data for the lookTable.
         {
-            int lookTablePos = (x + z * Constants.REGION_SIZE) * Constants.REGION_LOOKTABLE_POS_BYTE + Constants.REGION_LOOKTABLE_POS_BYTE ;
-            int increasePos = Constants.REGION_LOOKTABLE_POS_BYTE - 1;
-            for (int i = Constants.REGION_LOOKTABLE_POS_BYTE-1; i >= 0; i--)
+            int lookTablePos = (x + z * TerrainConstants.REGION_SIZE) * TerrainConstants.REGION_LOOKTABLE_POS_BYTE + TerrainConstants.REGION_LOOKTABLE_POS_BYTE ;
+            int increasePos = TerrainConstants.REGION_LOOKTABLE_POS_BYTE - 1;
+            for (int i = TerrainConstants.REGION_LOOKTABLE_POS_BYTE-1; i >= 0; i--)
             {
                 //First done the increase because the 0 is reserved for empty, the lookTable start at 1.
                 if (i == increasePos)
@@ -111,9 +111,9 @@ public class Region
         }
         else
         {
-            int startPos = (chunksDataStartPos - 1) * Constants.CHUNK_BYTES + Constants.REGION_LOOKTABLE_BYTES;
+            int startPos = (chunksDataStartPos - 1) * TerrainConstants.CHUNK_BYTES + TerrainConstants.REGION_LOOKTABLE_BYTES;
             // Write chunks bytes in the regionData list<byte>
-            for(int i = 0; i < Constants.CHUNK_BYTES; i++)
+            for(int i = 0; i < TerrainConstants.CHUNK_BYTES; i++)
             {
                 regionData[startPos + i] = chunkData[i];
             }
@@ -129,7 +129,7 @@ public class Region
         if(!modified)
             return;
 
-        if(Constants.REGION_SAVE_COMPRESSED)
+        if(TerrainConstants.REGION_SAVE_COMPRESSED)
         {
             if(ChunkManager.Instance.editorMode) 
             {

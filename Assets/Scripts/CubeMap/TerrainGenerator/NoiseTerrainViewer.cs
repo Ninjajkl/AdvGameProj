@@ -43,7 +43,7 @@ public class NoiseTerrainViewer : MonoBehaviour
                 Vector2Int key = new Vector2Int(x, z);
                 GameObject chunkObj = new GameObject("Chunk_" + key.x + "|" + key.y, typeof(MeshFilter), typeof(MeshRenderer));
                 chunkObj.transform.parent = transform;
-                chunkObj.transform.position = new Vector3(key.x * Constants.CHUNK_SIDE, 0, key.y * Constants.CHUNK_SIDE);
+                chunkObj.transform.position = new Vector3(key.x * TerrainConstants.CHUNK_SIDE, 0, key.y * TerrainConstants.CHUNK_SIDE);
 
                 Vector2Int offsetKey = new Vector2Int(x + chunkOffset.x, z+ chunkOffset.y);
                 chunkDict.Add(key, chunkObj.AddComponent<Chunk>().ChunkInit(noiseManager.GenerateChunkData(offsetKey), key.x, key.y, fakeRegion, false));

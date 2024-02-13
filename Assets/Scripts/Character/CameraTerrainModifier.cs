@@ -11,7 +11,7 @@ public class CameraTerrainModifier : MonoBehaviour
     public float modiferStrengh = 10;
     [Tooltip("Size of the brush, number of vertex modified")]
     public float sizeHit = 6;
-    [Tooltip("Color of the new voxels generated")][Range(0, Constants.NUMBER_MATERIALS-1)]
+    [Tooltip("Color of the new voxels generated")][Range(0, TerrainConstants.NUMBER_MATERIALS-1)]
     public int buildingMaterial = 0;
 
     private RaycastHit hit;
@@ -38,7 +38,7 @@ public class CameraTerrainModifier : MonoBehaviour
             }
             
         }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && buildingMaterial != Constants.NUMBER_MATERIALS - 1)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && buildingMaterial != TerrainConstants.NUMBER_MATERIALS - 1)
         {
             buildingMaterial++;
         }

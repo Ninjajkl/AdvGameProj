@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.Collections;
 using Unity.Mathematics;
 
-public static class Constants
+public static class TerrainConstants
 {
     #region configurable variables
     public const int CHUNK_SIZE = 16; //Number voxel per side

@@ -72,14 +72,14 @@ public class MeshBuilder : Singleton<MeshBuilder>
     {
         List<Vector3> vertexArray = new List<Vector3>();
         List<Vector2> matVert = new List<Vector2>();
-        for (int y = 0; y < Constants.MAX_HEIGHT; y++)//height
+        for (int y = 0; y < TerrainConstants.MAX_HEIGHT; y++)//height
         {
-            for (int z = 1; z < Constants.CHUNK_SIZE + 1; z++)//column, start at 1, because Z axis is inverted and need -1 as offset
+            for (int z = 1; z < TerrainConstants.CHUNK_SIZE + 1; z++)//column, start at 1, because Z axis is inverted and need -1 as offset
             {
-                for (int x = 0; x < Constants.CHUNK_SIZE; x++)//line 
+                for (int x = 0; x < TerrainConstants.CHUNK_SIZE; x++)//line 
                 {
                     Vector4[] cube = new Vector4[8];
-                    int mat = Constants.NUMBER_MATERIALS;
+                    int mat = TerrainConstants.NUMBER_MATERIALS;
                     cube[0] = CalculateVertexChunk(x, y, z, b, ref mat);
                     cube[1] = CalculateVertexChunk(x + 1, y, z, b, ref mat);
                     cube[2] = CalculateVertexChunk(x + 1, y, z - 1, b, ref mat);
@@ -133,10 +133,10 @@ public class MeshBuilder : Singleton<MeshBuilder>
 
         List<Vector3> vertexArray = new List<Vector3>();
 
-        for (int i = 0; Constants.triTable[cubeindex, i] != -1; i++)
+        for (int i = 0; TerrainConstants.triTable[cubeindex, i] != -1; i++)
         {
-            int v1 = Constants.cornerIndexAFromEdge[Constants.triTable[cubeindex, i]];
-            int v2 = Constants.cornerIndexBFromEdge[Constants.triTable[cubeindex, i]];
+            int v1 = TerrainConstants.cornerIndexAFromEdge[TerrainConstants.triTable[cubeindex, i]];
+            int v2 = TerrainConstants.cornerIndexBFromEdge[TerrainConstants.triTable[cubeindex, i]];
 
             if (interpolate)
                 vertexArray.Add(interporlateVertex(cube[v1], cube[v2], cube[v1].w, cube[v2].w));
@@ -147,23 +147,23 @@ public class MeshBuilder : Singleton<MeshBuilder>
             const float uvOffset = 0.01f; //Small offset for avoid pick pixels of other textures
             //NEED REWORKING FOR CORRECT WORKING, now have problems with the directions of the uv
             if (i % 6 == 0)
-                matVert.Add(new Vector2(Constants.MATERIAL_SIZE*(colorVert % Constants.MATERIAL_FOR_ROW)+ Constants.MATERIAL_SIZE-uvOffset,
-                                  1- Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW)-uvOffset));
+                matVert.Add(new Vector2(TerrainConstants.MATERIAL_SIZE*(colorVert % TerrainConstants.MATERIAL_FOR_ROW)+ TerrainConstants.MATERIAL_SIZE-uvOffset,
+                                  1- TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW)-uvOffset));
             else if (i % 6 == 1)
-                matVert.Add(new Vector2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + Constants.MATERIAL_SIZE - uvOffset,
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW)- Constants.MATERIAL_SIZE + uvOffset));
+                matVert.Add(new Vector2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + TerrainConstants.MATERIAL_SIZE - uvOffset,
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW)- TerrainConstants.MATERIAL_SIZE + uvOffset));
             else if(i % 6 == 2)
-                matVert.Add(new Vector2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + uvOffset,
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) -uvOffset));
+                matVert.Add(new Vector2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + uvOffset,
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) -uvOffset));
             else if (i % 6 == 3)
-                matVert.Add(new Vector2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + Constants.MATERIAL_SIZE - uvOffset,
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - Constants.MATERIAL_SIZE + uvOffset));
+                matVert.Add(new Vector2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + TerrainConstants.MATERIAL_SIZE - uvOffset,
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - TerrainConstants.MATERIAL_SIZE + uvOffset));
             else if (i % 6 == 4)
-                matVert.Add(new Vector2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW) + uvOffset,
-                                   1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - Constants.MATERIAL_SIZE + uvOffset));
+                matVert.Add(new Vector2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW) + uvOffset,
+                                   1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - TerrainConstants.MATERIAL_SIZE + uvOffset));
             else if (i % 6 == 5)
-                matVert.Add(new Vector2(Constants.MATERIAL_SIZE * (colorVert % Constants.MATERIAL_FOR_ROW + uvOffset),
-                                  1 - Constants.MATERIAL_SIZE * Mathf.Floor(colorVert / Constants.MATERIAL_FOR_ROW) - uvOffset));
+                matVert.Add(new Vector2(TerrainConstants.MATERIAL_SIZE * (colorVert % TerrainConstants.MATERIAL_FOR_ROW + uvOffset),
+                                  1 - TerrainConstants.MATERIAL_SIZE * Mathf.Floor(colorVert / TerrainConstants.MATERIAL_FOR_ROW) - uvOffset));
 
         }
 
@@ -177,14 +177,14 @@ public class MeshBuilder : Singleton<MeshBuilder>
     /// </summary>
     private Vector4 CalculateVertexChunk(int x, int y, int z, byte[] b, ref int colorVoxel)
     {
-        int index = (x + z * Constants.CHUNK_VERTEX_SIZE + y * Constants.CHUNK_VERTEX_AREA) * Constants.CHUNK_POINT_BYTE;
+        int index = (x + z * TerrainConstants.CHUNK_VERTEX_SIZE + y * TerrainConstants.CHUNK_VERTEX_AREA) * TerrainConstants.CHUNK_POINT_BYTE;
         int material = b[index+1];
         if (b[index] >= isoLevel && material < colorVoxel)
             colorVoxel = material;
         return new Vector4(
-            (x - Constants.CHUNK_SIZE / 2) * Constants.VOXEL_SIDE,
-            (y - Constants.MAX_HEIGHT / 2) * Constants.VOXEL_SIDE,
-            (z - Constants.CHUNK_SIZE / 2) * Constants.VOXEL_SIDE,
+            (x - TerrainConstants.CHUNK_SIZE / 2) * TerrainConstants.VOXEL_SIDE,
+            (y - TerrainConstants.MAX_HEIGHT / 2) * TerrainConstants.VOXEL_SIDE,
+            (z - TerrainConstants.CHUNK_SIZE / 2) * TerrainConstants.VOXEL_SIDE,
             b[index]);
     }
 
@@ -206,10 +206,10 @@ public class MeshBuilder : Singleton<MeshBuilder>
 
         List<Vector3> vertexArray = new List<Vector3>();
 
-        for (int i = 0; Constants.triTable[cubeindex, i] != -1; i++)
+        for (int i = 0; TerrainConstants.triTable[cubeindex, i] != -1; i++)
         {
-            int v1 = Constants.cornerIndexAFromEdge[Constants.triTable[cubeindex, i]];
-            int v2 = Constants.cornerIndexBFromEdge[Constants.triTable[cubeindex, i]];
+            int v1 = TerrainConstants.cornerIndexAFromEdge[TerrainConstants.triTable[cubeindex, i]];
+            int v2 = TerrainConstants.cornerIndexBFromEdge[TerrainConstants.triTable[cubeindex, i]];
 
             if (interpolate)
                 vertexArray.Add(interporlateVertex(cube[v1], cube[v2], cube[v1].w, cube[v2].w));
