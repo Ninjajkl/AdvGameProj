@@ -48,7 +48,6 @@ public class Chunk : MonoBehaviour
             Mesh myMesh = MeshBuilder.Instance.BuildChunk(data);
             GetComponent<MeshFilter>().mesh = myMesh;
             GetComponent<MeshCollider>().sharedMesh = myMesh;
-
         }
     }
 

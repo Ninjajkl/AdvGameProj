@@ -16,4 +16,15 @@ public class Constants
         Bedrock,
         Horror
     }
+
+    public enum UpgradeType
+    {
+        DrillHardness,
+        DrillStrength,
+        DrillRange,
+        DrillSize,
+        FlashlightUnlock,
+        FlashlightRange,
+        FlashlightIntensity
+    }
 }

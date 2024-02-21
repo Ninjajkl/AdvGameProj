@@ -26,7 +26,5 @@ public class GameManager : Singleton<GameManager>
         {
             Inventory[i] = 0;
         }
-        Debug.Log(Enum.GetValues(typeof(MaterialEnum)).Length);
-        Debug.Log(Inventory.Length);
     }
 }
