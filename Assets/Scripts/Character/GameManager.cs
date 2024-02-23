@@ -8,6 +8,7 @@ using static Constants;
 public class GameManager : Singleton<GameManager>
 {
     public PlayerController Player;
+    public PlayerUIController PlayerUI;
     public int[] Inventory;
     //Access each index with (int)MaterialEnum.Type
 

@@ -3438,6 +3438,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5222be4012607a54a9a40d2eae03f661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &583422476 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1308049827}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4626108303d3085418cb9e9061a54abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &590313748
 GameObject:
   m_ObjectHideFlags: 0
@@ -7763,6 +7775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 583422473}
+  PlayerUI: {fileID: 583422476}
   Inventory: 
 --- !u!4 &1330757027
 Transform:
@@ -9404,7 +9417,7 @@ GameObject:
   - component: {fileID: 1672383973}
   - component: {fileID: 1672383972}
   m_Layer: 0
-  m_Name: UpgradeTest
+  m_Name: Flashlight Unlock Test
   m_TagString: UpgradeableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

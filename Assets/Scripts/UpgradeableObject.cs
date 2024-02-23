@@ -13,12 +13,12 @@ public class UpgradeableObject : MonoBehaviour
         public int amount;
     }
 
-    [SerializeField]
-    private UpgradeType upgradeType;
-    [SerializeField]
-    private int upgradeLevel;
-    [SerializeField]
-    private NeededMaterials[] neededMaterials;
+    //[SerializeField]
+    public UpgradeType upgradeType;
+    //[SerializeField]
+    public int upgradeLevel;
+    //[SerializeField]
+    public NeededMaterials[] neededMaterials;
     [SerializeField]
     private GameObject brokenState;
     [SerializeField]
@@ -58,6 +58,7 @@ public class UpgradeableObject : MonoBehaviour
             brokenState.SetActive(false);
 
             gameManager.Player.ApplyUpgrade(upgradeType, upgradeLevel);
+            gameManager.PlayerUI.HideUpgradableObjectMenu();
         }
     }
     
@@ -87,10 +88,13 @@ public class UpgradeableObject : MonoBehaviour
         {
             //Check if the player has enough resources to upgrade
             newLayer = HaveEnoughMaterials() ? 7 : 8;
+
+            gameManager.PlayerUI.ShowUpgradableObjectMenu(this);
         }
         else
         {
             newLayer = 6;
+            gameManager.PlayerUI.HideUpgradableObjectMenu();
         }
         if(brokenState.layer != newLayer)
         {
