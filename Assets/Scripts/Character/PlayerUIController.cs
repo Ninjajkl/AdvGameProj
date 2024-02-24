@@ -22,7 +22,11 @@ public class PlayerUIController : MonoBehaviour
     private Vector2 UpgradeObjectUIDisplayPointA = new Vector2(-200,0f);
     //Off-Screen Point
     private Vector2 UpgradeObjectUIDisplayPointB = new Vector2(200,0f);
-    
+
+    [Header("Instructional Text Variables")]
+    public TMP_Text FlashlightPrompt;
+    public TMP_Text DrillPrompt;
+
     #region Upgradable Object UI Functions
 
     public void ShowUpgradableObjectMenu(UpgradeableObject highlightedObject) {
