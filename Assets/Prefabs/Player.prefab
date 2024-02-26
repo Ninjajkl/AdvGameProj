@@ -791,6 +791,7 @@ MonoBehaviour:
   miningLevel: 1
   buildingMaterial: 0
   flashlight: {fileID: 4096234904808915631}
+  playerUIController: {fileID: 2333980419652328265}
 --- !u!114 &2333980419652328265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,6 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4626108303d3085418cb9e9061a54abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 1501085888585397169}
   UpgradeableObjectUI: {fileID: 8588993263715519563}
   UpgradeableObjectUITransform: {fileID: 1439818919617473113}
   objectName: {fileID: 7086004152844880709}

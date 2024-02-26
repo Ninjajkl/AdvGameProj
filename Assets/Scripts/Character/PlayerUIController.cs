@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerUIController : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerController playerController;
+
     [Header("Upgradable Object UI Variables")]
     public  GameObject UpgradeableObjectUI;
     [SerializeField]
@@ -26,6 +29,10 @@ public class PlayerUIController : MonoBehaviour
     [Header("Instructional Text Variables")]
     public TMP_Text FlashlightPrompt;
     public TMP_Text DrillPrompt;
+
+    private void Update() {
+        
+    }
 
     #region Upgradable Object UI Functions
 
@@ -59,6 +66,18 @@ public class PlayerUIController : MonoBehaviour
                 materialsList.text += $"{highlightedObject.neededMaterials[i].amount} {highlightedObject.neededMaterials[i].materialType}\n";
             }
         }
+    }
+
+    #endregion
+
+    #region Instructional Prompts Functions
+
+    public void DisplayFlashlightPrompt(PlayerController playerController) {
+        if(!playerController.flashlight.enabled) {
+                FlashlightPrompt.text = "Press 'V' to Turn On Flashlight";
+            } else {
+                FlashlightPrompt.text = "Press 'V' to Turn Off Flashlight";
+            }
     }
 
     #endregion

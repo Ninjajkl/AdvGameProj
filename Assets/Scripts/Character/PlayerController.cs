@@ -46,8 +46,7 @@ public class PlayerController : MonoBehaviour
 
     //Character-Specific variables
     [Header("Character-Specific variables")]
-    [SerializeField]
-    private Light flashlight;
+    public Light flashlight;
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -59,12 +58,12 @@ public class PlayerController : MonoBehaviour
     private RaycastHit hit;
     private ChunkManager chunkManager;
 
-    private GameManager gameManager;
+    [SerializeField]
+    private PlayerUIController playerUIController;
 
     void Awake()
     {
         chunkManager = ChunkManager.Instance;
-        gameManager = GameManager.Instance;
     }
 
     void Start()
@@ -191,11 +190,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V) && flashlightUsable == true)
         {
             flashlight.enabled = !flashlight.enabled;
-            if(!flashlight.enabled) {
-                gameManager.PlayerUI.FlashlightPrompt.text = "Press 'V' to Turn On Flashlight";
-            } else {
-                gameManager.PlayerUI.FlashlightPrompt.text = "Press 'V' to Turn Off Flashlight";
-            }
+            playerUIController.DisplayFlashlightPrompt(this);
         }
     }
 
@@ -222,7 +217,7 @@ public class PlayerController : MonoBehaviour
             case UpgradeType.FlashlightUnlock:
                 //You can disable the flashlight by passing a 0 for level
                 flashlightUsable = level != 0;
-                gameManager.PlayerUI.FlashlightPrompt.gameObject.SetActive(true);
+                playerUIController.FlashlightPrompt.gameObject.SetActive(true);
                 //flashlight.enabled = level != 0;
                 break;
             case UpgradeType.FlashlightRange:
