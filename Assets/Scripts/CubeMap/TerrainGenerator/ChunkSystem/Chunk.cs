@@ -93,7 +93,7 @@ public class Chunk : MonoBehaviour
             // Add material to inventory otherwise
             else
             {
-                GameManager.Instance.Inventory[matVal] += 1;
+                GameManager.Instance.Player.Inventory[matVal] += 1;
             }
         }
 

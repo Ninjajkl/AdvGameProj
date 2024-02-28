@@ -90,7 +90,7 @@ public class ChunkManager : Singleton<ChunkManager>
     //Called each frame
     void Update()
     {
-        if(lastChunkViewDistance != chunkViewDistance)
+        if (lastChunkViewDistance != chunkViewDistance)
             CalculateDistances();
         HiddeRemoveChunk();
         CheckNewChunks();
@@ -271,6 +271,10 @@ public class ChunkManager : Singleton<ChunkManager>
 
                     int chunkModification = (int)(modification * (1 - distance / range));
                     //Debug.Log( vertexPoint + " | chunk: "+ hitChunk+ " / " + vertexChunk);//Debug Vertex point to chunk and vertexChunk
+                    if (!chunkDict.ContainsKey(hitChunk))
+                    {
+                        return;
+                    }
                     chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat);
 
                     //Functions for change last vertex of chunk (vertex that touch others chunk)

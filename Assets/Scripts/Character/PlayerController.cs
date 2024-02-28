@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,6 +54,8 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
     private bool flashlightUsable = false;
     private UpgradeableObject lastHovered;
+    private GameManager gameManager;
+    public int[] Inventory;
 
     //Terrain System variables
     private RaycastHit hit;
@@ -63,13 +66,21 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        gameManager = GameManager.Instance;
+        gameManager.Player = this;
         chunkManager = ChunkManager.Instance;
+
+        Inventory = new int[Enum.GetValues(typeof(MaterialEnum)).Length];
+        for (int i = 0; i < Inventory.Length; i++)
+        {
+            Inventory[i] = 0;
+        }
     }
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        
         //Ensure flashlight starts off
         flashlight.enabled = false;
 

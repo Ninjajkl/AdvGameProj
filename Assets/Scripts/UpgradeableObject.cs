@@ -66,7 +66,7 @@ public class UpgradeableObject : MonoBehaviour
     {
         foreach(var material in neededMaterials) 
         {
-            if (gameManager.Inventory[(int)material.materialType] < material.amount)
+            if (gameManager.Player.Inventory[(int)material.materialType] < material.amount)
             {
                 return false;
             }
