@@ -7732,6 +7732,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1501085888585397169, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
+      propertyPath: jetpackSpeed.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501085888585397169, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: jetpackSpeed.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501085888585397169, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: jetpackSpeed.z
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501085888585397169, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
       propertyPath: buildingMaterial
       value: 0
       objectReference: {fileID: 0}
@@ -7776,7 +7791,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 583422473}
   PlayerUI: {fileID: 583422476}
-  Inventory: 
 --- !u!4 &1330757027
 Transform:
   m_ObjectHideFlags: 0

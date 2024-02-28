@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Experimental.GlobalIllumination;
 using static Constants;
 
@@ -12,9 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float walkingSpeed = 7.5f;
     [SerializeField]
-    private float runningSpeed = 11.5f;
-    [SerializeField]
     private float jumpSpeed = 8.0f;
+    [SerializeField]
+    private Vector3 jetpackSpeed = new Vector3(4.0f, 8.0f, 4.0f);
     [SerializeField]
     private float gravity = 20.0f;
     [SerializeField]
@@ -158,16 +159,21 @@ public class PlayerController : MonoBehaviour
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-        // Press Left Shift to run
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+        float curSpeedX = canMove ? (!characterController.isGrounded ? jetpackSpeed.x : walkingSpeed) * Input.GetAxis("Vertical") : 0;
+        float curSpeedZ = canMove ? (!characterController.isGrounded ? jetpackSpeed.z : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        moveDirection = (forward * curSpeedX) + (right * curSpeedZ);
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        if (Input.GetButton("Jump") && canMove)
         {
-            moveDirection.y = jumpSpeed;
+            if (characterController.isGrounded)
+            {
+                moveDirection.y = jumpSpeed;
+            }
+            else
+            {
+                moveDirection.y = jetpackSpeed.y;
+            }
         }
         else
         {
@@ -183,7 +189,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
+        CollisionFlags flags = characterController.Move(moveDirection * Time.deltaTime);
+        if ((flags & CollisionFlags.Above) != 0)
+        {
+            //If hitting the ceiling, next frame move character downwards
+            moveDirection.y = -2.0f;
+        }
 
         // Player and Camera rotation
         if (canMove)
