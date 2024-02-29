@@ -954,6 +954,8 @@ MonoBehaviour:
   inventoryUI: {fileID: 5327965732535660032}
   inventorySlotPrefab: {fileID: 5805150501615545253, guid: 0ec1c77cb963b3c449cc49f74e9e75dd,
     type: 3}
+  inventorySlotManager: {fileID: 5154747644154975990, guid: 0ec1c77cb963b3c449cc49f74e9e75dd,
+    type: 3}
   slotGridGroup: {fileID: 2686636925891744833}
 --- !u!1 &4072617010257554632
 GameObject:

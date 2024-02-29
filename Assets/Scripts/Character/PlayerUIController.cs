@@ -35,6 +35,7 @@ public class PlayerUIController : MonoBehaviour
     [Header("Inventory UI Variables")]
     public GameObject inventoryUI;
     public GameObject inventorySlotPrefab;
+    public InventorySlotManager inventorySlotManager;
     public Transform slotGridGroup;
 
     #region Upgradable Object UI Functions
@@ -88,8 +89,9 @@ public class PlayerUIController : MonoBehaviour
     #region Inventory UI Functions
 
     public void ShowInventory() {
-        if(playerController.inventoryMenuOn == false) {
+        //if(playerController.inventoryMenuOn == false) {
             inventoryUI.SetActive(true);
+
             // Reset all inventory slots
             foreach(Transform child in slotGridGroup) {
                 Destroy(child.gameObject);
@@ -98,15 +100,17 @@ public class PlayerUIController : MonoBehaviour
             // Add slots with existing material into inventory
             for(int i = 0; i < playerController.Inventory.Length; i++) {
                 if(playerController.Inventory[i] > 0) {
-                    GameObject inventorySlot = Instantiate(inventorySlotPrefab, slotGridGroup);
-                    InventorySlotManager inventorySlotManager = inventorySlot.GetComponent<InventorySlotManager>();
+                    //GameObject inventorySlot = Instantiate(inventorySlotPrefab, slotGridGroup);
+                    Instantiate(inventorySlotPrefab, slotGridGroup);
+                    //InventorySlotManager inventorySlotManager = inventorySlot.GetComponent<InventorySlotManager>();
                     inventorySlotManager.slotName.text = $"{ConvertIntToMaterialEnum(i)}";
                     inventorySlotManager.slotQuantity.text = $"{playerController.Inventory[i]}";
                 }
             }
+            /*
         } else {
             inventoryUI.SetActive(false);
-        }
+        }*/
     }
 
     public MaterialEnum ConvertIntToMaterialEnum(int enumValue)

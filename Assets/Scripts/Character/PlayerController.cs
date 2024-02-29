@@ -216,10 +216,10 @@ public class PlayerController : MonoBehaviour
             playerUIController.DisplayFlashlightPrompt(this);
         }
 
-        if (Input.GetKeyDown(KeyCode.I)) {
+        //if (Input.GetKeyDown(KeyCode.I)) {
             playerUIController.ShowInventory();
-            inventoryMenuOn = !inventoryMenuOn;
-        }
+        //    inventoryMenuOn = !inventoryMenuOn;
+        //}
     }
 
     #endregion
