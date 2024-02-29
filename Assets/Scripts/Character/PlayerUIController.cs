@@ -100,12 +100,25 @@ public class PlayerUIController : MonoBehaviour
                 if(playerController.Inventory[i] > 0) {
                     GameObject inventorySlot = Instantiate(inventorySlotPrefab, slotGridGroup);
                     InventorySlotManager inventorySlotManager = inventorySlot.GetComponent<InventorySlotManager>();
-                    //inventorySlotManager.slotName.text = "";
+                    inventorySlotManager.slotName.text = $"{ConvertIntToMaterialEnum(i)}";
                     inventorySlotManager.slotQuantity.text = $"{playerController.Inventory[i]}";
                 }
             }
         } else {
             inventoryUI.SetActive(false);
+        }
+    }
+
+    public MaterialEnum ConvertIntToMaterialEnum(int enumValue)
+    {
+        if (Enum.IsDefined(typeof(MaterialEnum), enumValue))
+        {
+            return (MaterialEnum)Enum.ToObject(typeof(MaterialEnum), enumValue);
+        }
+        else
+        {
+            Debug.LogError("Invalid enum value");
+            return MaterialEnum.Stone; // Or any default value you prefer
         }
     }
 
