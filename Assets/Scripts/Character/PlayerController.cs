@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     private float rotationX = 0;
     private bool canMove = true;
     private bool flashlightUsable = false;
+    public bool inventoryMenuOn = false;
     private UpgradeableObject lastHovered;
     private GameManager gameManager;
     public int[] Inventory;
@@ -214,6 +215,11 @@ public class PlayerController : MonoBehaviour
             flashlight.enabled = !flashlight.enabled;
             playerUIController.DisplayFlashlightPrompt(this);
         }
+
+        if (Input.GetKeyDown(KeyCode.I)) {
+            playerUIController.ShowInventory();
+            inventoryMenuOn = !inventoryMenuOn;
+        }
     }
 
     #endregion
@@ -239,8 +245,7 @@ public class PlayerController : MonoBehaviour
             case UpgradeType.FlashlightUnlock:
                 //You can disable the flashlight by passing a 0 for level
                 flashlightUsable = level != 0;
-                playerUIController.FlashlightPrompt.gameObject.SetActive(true);
-                //flashlight.enabled = level != 0;
+                playerUIController.flashlightPrompt.gameObject.SetActive(true);
                 break;
             case UpgradeType.FlashlightRange:
                 flashlight.range += level;

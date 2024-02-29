@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Constants;
 
 public class PlayerUIController : MonoBehaviour
 {
@@ -10,9 +12,9 @@ public class PlayerUIController : MonoBehaviour
     private PlayerController playerController;
 
     [Header("Upgradable Object UI Variables")]
-    public  GameObject UpgradeableObjectUI;
+    public  GameObject upgradeableObjectUI;
     [SerializeField]
-    private RectTransform UpgradeableObjectUITransform;
+    private RectTransform upgradeableObjectUITransform;
     [SerializeField]
     private TMP_Text objectName;
     [SerializeField]
@@ -22,22 +24,23 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField]
     private Button upgradeButton;
     //On-Screen Point
-    private Vector2 UpgradeObjectUIDisplayPointA = new Vector2(-200,0f);
+    private Vector2 upgradeObjectUIDisplayPointA = new Vector2(-200,0f);
     //Off-Screen Point
-    private Vector2 UpgradeObjectUIDisplayPointB = new Vector2(200,0f);
+    private Vector2 upgradeObjectUIDisplayPointB = new Vector2(200,0f);
 
     [Header("Instructional Text Variables")]
-    public TMP_Text FlashlightPrompt;
-    public TMP_Text DrillPrompt;
+    public TMP_Text flashlightPrompt;
+    public TMP_Text drillPrompt;
 
-    private void Update() {
-        
-    }
+    [Header("Inventory UI Variables")]
+    public GameObject inventoryUI;
+    public GameObject inventorySlotPrefab;
+    public Transform slotGridGroup;
 
     #region Upgradable Object UI Functions
 
     public void ShowUpgradableObjectMenu(UpgradeableObject highlightedObject) {
-        UpgradeableObjectUI.gameObject.SetActive(true);
+        upgradeableObjectUI.gameObject.SetActive(true);
         GetUpgradeableObjectInfo(highlightedObject);
         if(!highlightedObject.HaveEnoughMaterials()) {
             upgradeButton.interactable = false;
@@ -46,12 +49,12 @@ public class PlayerUIController : MonoBehaviour
         }
         
         // Menu Appearance Slide
-        UpgradeableObjectUITransform.anchoredPosition = Vector2.Lerp(UpgradeableObjectUITransform.anchoredPosition, UpgradeObjectUIDisplayPointA, Time.deltaTime*3f);
+        upgradeableObjectUITransform.anchoredPosition = Vector2.Lerp(upgradeableObjectUITransform.anchoredPosition, upgradeObjectUIDisplayPointA, Time.deltaTime*3f);
     }
 
     public void HideUpgradableObjectMenu() {
-        UpgradeableObjectUI.SetActive(false);
-        UpgradeableObjectUITransform.anchoredPosition = UpgradeObjectUIDisplayPointB;
+        upgradeableObjectUI.SetActive(false);
+        upgradeableObjectUITransform.anchoredPosition = upgradeObjectUIDisplayPointB;
     }
 
     public void GetUpgradeableObjectInfo(UpgradeableObject highlightedObject) {
@@ -70,14 +73,40 @@ public class PlayerUIController : MonoBehaviour
 
     #endregion
 
-    #region Instructional Prompts Functions
+    #region Instructional Prompts UI Functions
 
     public void DisplayFlashlightPrompt(PlayerController playerController) {
         if(!playerController.flashlight.enabled) {
-                FlashlightPrompt.text = "Press 'V' to Turn On Flashlight";
+                flashlightPrompt.text = "Press 'V' to Turn On Flashlight";
             } else {
-                FlashlightPrompt.text = "Press 'V' to Turn Off Flashlight";
+                flashlightPrompt.text = "Press 'V' to Turn Off Flashlight";
             }
+    }
+
+    #endregion
+
+    #region Inventory UI Functions
+
+    public void ShowInventory() {
+        if(playerController.inventoryMenuOn == false) {
+            inventoryUI.SetActive(true);
+            // Reset all inventory slots
+            foreach(Transform child in slotGridGroup) {
+                Destroy(child.gameObject);
+            }
+
+            // Add slots with existing material into inventory
+            for(int i = 0; i < playerController.Inventory.Length; i++) {
+                if(playerController.Inventory[i] > 0) {
+                    GameObject inventorySlot = Instantiate(inventorySlotPrefab, slotGridGroup);
+                    InventorySlotManager inventorySlotManager = inventorySlot.GetComponent<InventorySlotManager>();
+                    //inventorySlotManager.slotName.text = "";
+                    inventorySlotManager.slotQuantity.text = $"{playerController.Inventory[i]}";
+                }
+            }
+        } else {
+            inventoryUI.SetActive(false);
+        }
     }
 
     #endregion
