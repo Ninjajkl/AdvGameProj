@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
         {
 
-            float modification = (Input.GetMouseButton(0)) ? modiferStrengh : -modiferStrengh;
+            float modification = Input.GetMouseButton(1) ? modiferStrengh : -modiferStrengh;
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rangeHit))
             {
                 chunkManager.ModifyChunkData(hit.point, sizeHit, modification, buildingMaterial);
@@ -216,10 +216,10 @@ public class PlayerController : MonoBehaviour
             playerUIController.DisplayFlashlightPrompt(this);
         }
 
-        //if (Input.GetKeyDown(KeyCode.I)) {
+        if (Input.GetKeyDown(KeyCode.I)) {
             playerUIController.ShowInventory();
-        //    inventoryMenuOn = !inventoryMenuOn;
-        //}
+            inventoryMenuOn = !inventoryMenuOn;
+        }
     }
 
     #endregion

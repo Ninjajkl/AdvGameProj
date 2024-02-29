@@ -89,7 +89,7 @@ public class PlayerUIController : MonoBehaviour
     #region Inventory UI Functions
 
     public void ShowInventory() {
-        //if(playerController.inventoryMenuOn == false) {
+        if(playerController.inventoryMenuOn == false) {
             inventoryUI.SetActive(true);
 
             // Reset all inventory slots
@@ -107,10 +107,10 @@ public class PlayerUIController : MonoBehaviour
                     inventorySlotManager.slotQuantity.text = $"{playerController.Inventory[i]}";
                 }
             }
-            /*
+            
         } else {
             inventoryUI.SetActive(false);
-        }*/
+        }
     }
 
     public MaterialEnum ConvertIntToMaterialEnum(int enumValue)
