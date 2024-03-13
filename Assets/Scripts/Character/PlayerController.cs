@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private float sizeHit = 6;
     [Tooltip("The tier of material or lower that can be mined. Ignored in Editor Mode")]
     [SerializeField]
-    private float miningLevel = 1;
+    private int miningLevel = 1;
     [Tooltip("Color of the new voxels generated. Only applicable in Editor mode")]
     [Range(0, TerrainConstants.NUMBER_MATERIALS - 1)]
     [SerializeField]
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
             float modification = Input.GetMouseButton(1) ? modiferStrengh : -modiferStrengh;
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rangeHit))
             {
-                chunkManager.ModifyChunkData(hit.point, sizeHit, modification, buildingMaterial);
+                chunkManager.ModifyChunkData(hit.point, sizeHit, modification, buildingMaterial, miningLevel);
             }
 
         }

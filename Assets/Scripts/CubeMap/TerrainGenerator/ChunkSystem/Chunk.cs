@@ -57,18 +57,18 @@ public class Chunk : MonoBehaviour
     /// <param name="vertexPoint"></param>
     /// <param name="modification"></param>
     /// <param name="mat"></param>
-    public void modifyTerrain(Vector3 vertexPoint, int modification, int mat = 0)
+    public void modifyTerrain(Vector3 vertexPoint, int modification, int mat = 0, int hardness = 9)
     {
         if (modification > 0)
             addTerrain(vertexPoint,modification, mat);//A little more costly
         else
-            removeTerrain(vertexPoint,modification);//Less operations
+            removeTerrain(vertexPoint,modification, hardness);//Less operations
     }
 
     /// <summary>
     /// Remove terrain in the chunk,
     /// </summary>
-    public void removeTerrain(Vector3 vertexPoint, int modification)
+    public void removeTerrain(Vector3 vertexPoint, int modification, int hardness = 9)
     {
         int byteIndex = ((int)vertexPoint.x + (int)vertexPoint.z * TerrainConstants.CHUNK_VERTEX_SIZE + (int)vertexPoint.y * TerrainConstants.CHUNK_VERTEX_AREA) * TerrainConstants.CHUNK_POINT_BYTE;
 
@@ -86,7 +86,12 @@ public class Chunk : MonoBehaviour
         else
         {
             // If trying to break bedrock, don't
-            if (matVal == (int)MaterialEnum.Bedrock)
+            //if (matVal == (int)MaterialEnum.Bedrock)
+            //{
+            //    return;
+            //}
+            // If trying to break something harder than the drill, don't
+            if (matVal > hardness)
             {
                 return;
             }

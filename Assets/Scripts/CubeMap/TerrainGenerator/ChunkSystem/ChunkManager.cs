@@ -230,7 +230,7 @@ public class ChunkManager : Singleton<ChunkManager>
     /// <summary>
     /// Modify voxels in a specific point of a chunk.
     /// </summary>
-    public void ModifyChunkData(Vector3 modificationPoint, float range, float modification, int mat = -1)
+    public void ModifyChunkData(Vector3 modificationPoint, float range, float modification, int mat = -1, int hardness = 9)
     {
         Vector3 originalPint = modificationPoint;
         modificationPoint = new Vector3(modificationPoint.x / TerrainConstants.VOXEL_SIDE, modificationPoint.y / TerrainConstants.VOXEL_SIDE, modificationPoint.z / TerrainConstants.VOXEL_SIDE);
@@ -275,7 +275,7 @@ public class ChunkManager : Singleton<ChunkManager>
                     {
                         return;
                     }
-                    chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat);
+                    chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat, hardness);
 
                     //Functions for change last vertex of chunk (vertex that touch others chunk)
                     if (vertexChunk.x == 0 && vertexChunk.z == 0)//Interact with chunk(-1,-1), chunk(-1,0) and chunk(0,-1)
@@ -283,27 +283,27 @@ public class ChunkManager : Singleton<ChunkManager>
                         //Vertex of chunk (-1,0)
                         hitChunk.x -= 1;//Chunk -1
                         vertexChunk.x = TerrainConstants.CHUNK_SIZE; //Vertex of a chunk -1, last vertex
-                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat);
+                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat, hardness);
                         //Vertex of chunk (-1,-1)
                         hitChunk.y -= 1;
                         vertexChunk.z = TerrainConstants.CHUNK_SIZE;
-                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat);
+                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat, hardness);
                         //Vertex of chunk (0,-1)
                         hitChunk.x += 1;
                         vertexChunk.x = 0;
-                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat);
+                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat, hardness);
                     }
                     else if (vertexChunk.x == 0)//Interact with vertex of chunk(-1,0)
                     {
                         hitChunk.x -= 1;
                         vertexChunk.x = TerrainConstants.CHUNK_SIZE;
-                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat);
+                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat, hardness);
                     }
                     else if (vertexChunk.z == 0)//Interact with vertex of chunk(0,-1)
                     {
                         hitChunk.y -= 1;
                         vertexChunk.z = TerrainConstants.CHUNK_SIZE;
-                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat);
+                        chunkDict[hitChunk].modifyTerrain(vertexChunk, chunkModification, mat, hardness);
                     }
 
                     //Debug.Log(distance / range);
