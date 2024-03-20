@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        
+
         //Ensure flashlight starts off
         flashlight.enabled = false;
 
@@ -112,6 +112,8 @@ public class PlayerController : MonoBehaviour
             {
                 chunkManager.ModifyChunkData(hit.point, sizeHit, modification, buildingMaterial, miningLevel);
             }
+
+            playerUIController.updateInventoryOnClick.Invoke();
 
         }
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && buildingMaterial != TerrainConstants.NUMBER_MATERIALS - 1)
@@ -216,7 +218,8 @@ public class PlayerController : MonoBehaviour
             playerUIController.DisplayFlashlightPrompt(this);
         }
 
-        if (Input.GetKeyDown(KeyCode.I)) {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
             playerUIController.ShowInventory();
             inventoryMenuOn = !inventoryMenuOn;
         }
@@ -228,7 +231,7 @@ public class PlayerController : MonoBehaviour
 
     public void ApplyUpgrade(UpgradeType upgradeType, int level = 0)
     {
-        switch(upgradeType)
+        switch (upgradeType)
         {
             case UpgradeType.DrillHardness:
                 miningLevel += level;
