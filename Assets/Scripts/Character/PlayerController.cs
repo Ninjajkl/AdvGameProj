@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
         //If hit something
         if (collider != null)
         {
-            Type[] interactableTypes = { typeof(UpgradeableObject), typeof(Workbench), typeof(Refinery) };
+            Type[] interactableTypes = { typeof(UpgradeableObject), typeof(Workbench), typeof(Refinery), typeof(PickupableDrill) };
             foreach (Type type in interactableTypes)
             {
                 Interactable interactableObject = collider.GetComponentInParent(type) as Interactable;

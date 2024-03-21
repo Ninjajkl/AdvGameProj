@@ -33,7 +33,7 @@ public class Refinery : Interactable
 
     private void Start()
     {
-        SetLayerRecursively(transform, 6);
+        HoveredOver(false);
     }
 
     public void Refine(RefineryRecipe refineryRecipe, int amountRefined)
@@ -77,7 +77,20 @@ public class Refinery : Interactable
 
     public override void HoveredOver(bool hovering)
     {
-        //Right now, do nothing
-        return;
+        int newLayer = 0;
+        //if too far from player, turn off outline
+        if (!nearPlayer)
+        {
+            newLayer = 0;
+        }
+        //Otherwise, turn on unselected outline
+        else
+        {
+            newLayer = 6;
+        }
+        if (transform.gameObject.layer != newLayer)
+        {
+            SetLayerRecursively(transform, newLayer);
+        }
     }
 }
