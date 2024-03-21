@@ -47,6 +47,7 @@ public class PlayerUIController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.PlayerUI = this;
         InitializeMiniInventorySystem();
     }
 

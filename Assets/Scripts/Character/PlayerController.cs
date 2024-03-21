@@ -55,16 +55,13 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
     private bool flashlightUsable = false;
     public bool inventoryMenuOn = false;
-    private UpgradeableObject lastHovered;
+    private Interactable lastHovered;
     private GameManager gameManager;
     public int[] Inventory;
 
     //Terrain System variables
     private RaycastHit hit;
     private ChunkManager chunkManager;
-
-    [SerializeField]
-    private PlayerUIController playerUIController;
 
     void Awake()
     {
@@ -96,7 +93,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         TerrainInteraction();
-        UpgradeableInteractions();
+        Interactions();
         Move();
         MiscControls();
     }
@@ -113,7 +110,7 @@ public class PlayerController : MonoBehaviour
                 chunkManager.ModifyChunkData(hit.point, sizeHit, modification, buildingMaterial, miningLevel);
             }
 
-            playerUIController.updateInventoryOnClick.Invoke();
+            gameManager.PlayerUI.updateInventoryOnClick.Invoke();
 
         }
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && buildingMaterial != TerrainConstants.NUMBER_MATERIALS - 1)
@@ -126,31 +123,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpgradeableInteractions()
+    private void Interactions()
     {
-        //Check for Upgradeable objects
-        UpgradeableObject upgradeableObject = null;
+        //Check for Interactable objects
+        Collider collider = null;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactRange))
         {
-            upgradeableObject = hit.collider.GetComponentInParent<UpgradeableObject>();
+            collider = hit.collider;
         }
 
-        //If in interacting range of upgradeable object, show if we have the materials to upgrade it or not
-        if (upgradeableObject != null)
+        bool hitHoverable = false;
+        //If hit something
+        if (collider != null)
         {
-            if (lastHovered != null && upgradeableObject != lastHovered)
+            Type[] interactableTypes = { typeof(UpgradeableObject), typeof(Workbench), typeof(Refinery) };
+            foreach (Type type in interactableTypes)
             {
-                lastHovered.HoveredOver(false);
-            }
-            upgradeableObject.HoveredOver(true);
-            lastHovered = upgradeableObject;
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                upgradeableObject.FixObject();
+                Interactable interactableObject = collider.GetComponentInParent(type) as Interactable;
+                if (interactableObject != null)
+                {
+                    hitHoverable = true;
+                    if (lastHovered != null && interactableObject != lastHovered)
+                    {
+                        lastHovered.HoveredOver(false);
+                    }
+                    interactableObject.HoveredOver(true);
+                    lastHovered = interactableObject;
+                    if (Input.GetKeyDown(KeyCode.E) && interactableObject is UpgradeableObject upgradeableObject)
+                    {
+                        upgradeableObject.FixObject();
+                    }
+                    break;
+                }
             }
         }
-        //If no longer hovering, turn back to unselected
-        else if (lastHovered != null)
+        //If didn't hit anything hoverable (implements Interactable class)
+        if (!hitHoverable && lastHovered != null)
         {
             lastHovered.HoveredOver(false);
             lastHovered = null;
@@ -215,12 +223,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V) && flashlightUsable == true)
         {
             flashlight.enabled = !flashlight.enabled;
-            playerUIController.DisplayFlashlightPrompt(this);
+            gameManager.PlayerUI.DisplayFlashlightPrompt(this);
         }
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            playerUIController.ShowInventory();
+            gameManager.PlayerUI.ShowInventory();
             inventoryMenuOn = !inventoryMenuOn;
         }
     }
@@ -248,7 +256,7 @@ public class PlayerController : MonoBehaviour
             case UpgradeType.FlashlightUnlock:
                 //You can disable the flashlight by passing a 0 for level
                 flashlightUsable = level != 0;
-                playerUIController.flashlightPrompt.gameObject.SetActive(true);
+                gameManager.PlayerUI.flashlightPrompt.gameObject.SetActive(true);
                 break;
             case UpgradeType.FlashlightRange:
                 flashlight.range += level;

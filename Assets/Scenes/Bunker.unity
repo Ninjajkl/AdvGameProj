@@ -2282,8 +2282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077d915c39d9d6145ae8c3565fffae5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeType: 0
-  upgradeLevel: 0
+  upgradeType: 1
+  upgradeLevel: 1
   neededMaterials: []
   brokenState: {fileID: 830301599}
   fixedState: {fileID: 1640535911}
@@ -6342,6 +6342,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995188502}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1007542776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dd3ed4d73a3372e41aa41c91a314f90d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1008448854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1008448854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6378,7 +6384,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: dd3ed4d73a3372e41aa41c91a314f90d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.363
+      value: 9.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd3ed4d73a3372e41aa41c91a314f90d,
         type: 3}
@@ -6449,6 +6455,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dd3ed4d73a3372e41aa41c91a314f90d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1056181963}
     - targetCorrespondingSourceObject: {fileID: 8179300359986011602, guid: dd3ed4d73a3372e41aa41c91a314f90d,
         type: 3}
       insertIndex: -1
@@ -6685,6 +6695,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1008448854}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1056181963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007542776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b01ffef80f0ab4e84113a073812065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refineryRecipies:
+  - rawMaterial: 3
+    rawForRefined: 4
+    refinedMaterial: 4
 --- !u!1 &1070743212
 GameObject:
   m_ObjectHideFlags: 0
@@ -7279,6 +7305,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1056181962}
+  - {fileID: 1772305972}
   - {fileID: 1685762011}
   - {fileID: 1728495568}
   m_Father: {fileID: 47533719}
@@ -9027,6 +9054,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rangeHit
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501085888585397169, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: miningLevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1501085888585397169, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
@@ -11259,10 +11291,10 @@ MonoBehaviour:
   upgradeType: 0
   upgradeLevel: 1
   neededMaterials:
-  - materialType: 2
-    amount: 20
-  - materialType: 4
-    amount: 40
+  - materialType: 0
+    amount: 2000
+  - materialType: 1
+    amount: 400
   brokenState: {fileID: 2070125927}
   fixedState: {fileID: 1970554361}
 --- !u!4 &1685762011
@@ -11274,7 +11306,7 @@ Transform:
   m_GameObject: {fileID: 1685762009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.13, y: 2.156, z: 10.062}
+  m_LocalPosition: {x: 1.13, y: 8.31, z: 10.062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11853,6 +11885,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772165075}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1772305971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1772305972}
+  - component: {fileID: 1772305973}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1772305972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772305971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1121903496}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1772305973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772305971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defbfb9d8025dc3408df2c945166c634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workbenchUpgrades:
+  - upgradeType: 0
+    upgradeLevel: 0
+    neededMaterials: []
 --- !u!1001 &1830067502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13352,10 +13432,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 490bef198eecb6e43bf00c4f90673458,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 490bef198eecb6e43bf00c4f90673458,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 490bef198eecb6e43bf00c4f90673458,
         type: 3}
       propertyPath: m_Name
       value: refridgerator_broken
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 490bef198eecb6e43bf00c4f90673458,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

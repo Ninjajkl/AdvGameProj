@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using static Constants;
 
-public class UpgradeableObject : MonoBehaviour
+public class UpgradeableObject : Interactable
 {
     [System.Serializable]
     public class NeededMaterials
@@ -45,8 +45,10 @@ public class UpgradeableObject : MonoBehaviour
         //On start make sure only the brokenState is active
         brokenState.SetActive(true);
         fixedState.SetActive(false);
+        objectFixed = false;
         //Set brokenState Layer to Unselected by default
-        brokenState.layer = 6;
+        //brokenState.layer = 6;
+        SetLayerRecursively(brokenState.transform, 6);
     }
 
     public void FixObject()
@@ -57,6 +59,7 @@ public class UpgradeableObject : MonoBehaviour
             fixedState.SetActive(true);
             brokenState.SetActive(false);
 
+            RemoveMaterialsFromInventory();
             gameManager.Player.ApplyUpgrade(upgradeType, upgradeLevel);
             gameManager.PlayerUI.HideUpgradableObjectMenu();
         }
@@ -74,7 +77,16 @@ public class UpgradeableObject : MonoBehaviour
         return true;
     }
 
-    public void HoveredOver(bool hovering)
+    public void RemoveMaterialsFromInventory()
+    {
+        foreach (var material in neededMaterials)
+        {
+            gameManager.Player.Inventory[(int)material.materialType] -= material.amount;
+        }
+        gameManager.PlayerUI.updateInventoryOnClick.Invoke();
+    }
+
+    public override void HoveredOver(bool hovering)
     {
         //Do nothing if object fixed
         if (objectFixed)
@@ -98,7 +110,8 @@ public class UpgradeableObject : MonoBehaviour
         }
         if(brokenState.layer != newLayer)
         {
-            brokenState.layer = newLayer;
+            SetLayerRecursively(brokenState.transform, newLayer);
+            //brokenState.layer = newLayer;
         }
     }
 }
