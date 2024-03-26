@@ -231,6 +231,16 @@ public class PlayerController : MonoBehaviour
             gameManager.PlayerUI.ShowInventory();
             inventoryMenuOn = !inventoryMenuOn;
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            gameManager.PlayerUI.ShowRefineryMenu();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            gameManager.PlayerUI.ShowPauseMenu();
+        }
     }
 
     #endregion

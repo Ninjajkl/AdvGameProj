@@ -83,6 +83,11 @@ public class Refinery : Interactable
         {
             newLayer = 0;
         }
+        else if (hovering)
+        {
+            //Check if the player is looking at it
+            newLayer = 7;
+        }
         //Otherwise, turn on unselected outline
         else
         {

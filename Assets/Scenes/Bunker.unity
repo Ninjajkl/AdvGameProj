@@ -6858,10 +6858,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearPlayer: 0
   refineryRecipies:
-  - coalForRefined: 0
+  - coalForRefined: 1
     rawMaterial: 3
     rawForRefined: 4
     refinedMaterial: 4
+  - coalForRefined: 9001
+    rawMaterial: 6
+    rawForRefined: 333
+    refinedMaterial: 8
 --- !u!1 &1070743212
 GameObject:
   m_ObjectHideFlags: 0
@@ -9228,6 +9232,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 283288932504628436, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 283288932504628436, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 283288932504628436, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 283288932504628436, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 283288932504628436, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 283288932504628436, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1465209637146027971, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9303,6 +9337,16 @@ PrefabInstance:
       propertyPath: buildingMaterial
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: refinery
+      value: 
+      objectReference: {fileID: 1056181963}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: refineryObject
+      value: 
+      objectReference: {fileID: 1056181963}
     - target: {fileID: 3849712839856549960, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
       propertyPath: m_Name

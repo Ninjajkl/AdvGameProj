@@ -45,10 +45,23 @@ public class PlayerUIController : MonoBehaviour
     public List<InventorySlotManager> inventorySlotManagers; // For Side Inventory (Maybe will refactor later??)
     public UnityEvent updateInventoryOnClick;
 
+    [Header("Refinery IU Variables")]
+    public GameObject refineryUI;
+    public Transform refineryGridGroup;
+    public Refinery refineryObject;
+    public GameObject refinerySlotPrefab;
+    public List<RefinerySlot> refinerySlots;
+    public UnityEvent updateRefineryUI;
+
+    [Header("Pause UI Variables")]
+    public GameObject pauseUI;
+    public GameObject settingsUI;
+
     private void Start()
     {
         GameManager.Instance.PlayerUI = this;
         InitializeMiniInventorySystem();
+        InitializeRefinerySystem();
     }
 
     #region Upgradable Object UI Functions
@@ -132,9 +145,7 @@ public class PlayerUIController : MonoBehaviour
             {
                 if (playerController.Inventory[i] > 0)
                 {
-                    //GameObject inventorySlot = Instantiate(inventorySlotPrefab, slotGridGroup);
                     Instantiate(inventorySlotPrefab, slotGridGroup);
-                    //InventorySlotManager inventorySlotManager = inventorySlot.GetComponent<InventorySlotManager>();
                     inventorySlotManager.slotName.text = $"{ConvertIntToMaterialEnum(i)}";
                     inventorySlotManager.slotQuantity.text = $"{playerController.Inventory[i]}";
                 }
@@ -188,6 +199,127 @@ public class PlayerUIController : MonoBehaviour
             Debug.LogError("Invalid enum value");
             return MaterialEnum.Stone; // Or any default value you prefer
         }
+    }
+
+    #endregion
+
+    #region Refinery UI Functions
+
+    public void InitializeRefinerySystem()
+    {
+        for (int i = 0; i < refineryObject.refineryRecipies.Length; i++)
+        {
+            RefinerySlot refinerySlot = gameObject.AddComponent<RefinerySlot>();
+            refinerySlot.index = i;
+            refinerySlots.Add(refinerySlot);
+        }
+
+        updateRefineryUI.AddListener(UpdateRefineryUIDynamic);
+    }
+
+    public void ShowRefineryMenu()
+    {
+        refineryUI.SetActive(true);
+        playerController.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        updateRefineryUI.Invoke();
+    }
+
+    public void UpdateRefineryUIDynamic()
+    {
+        for (int i = 0; i < refineryObject.refineryRecipies.Length; i++)
+        {
+            if (refinerySlots[i].instianiated == false)
+            {
+                GameObject refineryslot = Instantiate(refinerySlotPrefab, refineryGridGroup);
+                refinerySlots[i] = refineryslot.GetComponent<RefinerySlot>();
+                refinerySlots[i].refinedQuantityInputField = refineryslot.GetComponentInChildren<TMP_InputField>();
+                refinerySlots[i].index = i;
+                refinerySlots[i].refinedQuantityInputField.onValueChanged.AddListener(inputNum => OnInputChanged(inputNum, i));
+
+                refinerySlots[i].refinedMaterialText.text = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
+                refinerySlots[i].neededCoalText.text = $"{refineryObject.refineryRecipies[i].coalForRefined} Coal";
+                refinerySlots[i].neededMaterialText.text = $"{refineryObject.refineryRecipies[i].rawForRefined} {refineryObject.refineryRecipies[i].rawMaterial}";
+                refinerySlots[i].refinedMaterialQuantityText.text = $"1 {refineryObject.refineryRecipies[i].refinedMaterial}";
+                refinerySlots[i].instianiated = true;
+            }
+            int multiple = int.Parse(refinerySlots[i].refinedQuantityInputField.text);
+            refinerySlots[i].refinedMaterialText.text = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
+            refinerySlots[i].neededCoalText.text = $"{refineryObject.refineryRecipies[i].coalForRefined * multiple} Coal";
+            refinerySlots[i].neededMaterialText.text = $"{refineryObject.refineryRecipies[i].rawForRefined * multiple} {refineryObject.refineryRecipies[i].rawMaterial}";
+            refinerySlots[i].refinedMaterialQuantityText.text = $"{multiple} {refineryObject.refineryRecipies[i].refinedMaterial}";
+        }
+    }
+
+    public void OnInputChanged(string inputNum, int index)
+    {
+        Debug.Log($"Num = {inputNum}");
+        if (inputNum != "")
+        {
+            int num = int.Parse(inputNum);
+            if (num < 1 || inputNum.Equals("-"))
+            {
+                refinerySlots[index].refinedQuantityInputField.text = "1";
+            }
+            updateRefineryUI.Invoke();
+        }
+        else
+        {
+            refinerySlots[index].refinedQuantityInputField.text = "1";
+        }
+    }
+
+    public void HideRefineryMenu()
+    {
+        refineryUI.SetActive(false);
+        playerController.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    #endregion
+
+    #region Pause UI Functions
+
+    public void ShowPauseMenu()
+    {
+        pauseUI.SetActive(true);
+        playerController.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        pauseUI.SetActive(false);
+        playerController.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1;
+    }
+
+    public void ShowSettingsMenu()
+    {
+        pauseUI.SetActive(false);
+        settingsUI.SetActive(true);
+    }
+
+    public void HideSettingsMenu()
+    {
+        pauseUI.SetActive(true);
+        settingsUI.SetActive(false);
+    }
+
+    public void GotoMainMenu()
+    {
+        // TODO: Scene Manager
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     #endregion
