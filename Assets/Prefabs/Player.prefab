@@ -1964,6 +1964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 1501085888585397169}
+  armScript: {fileID: 0}
   upgradeableObjectUI: {fileID: 8588993263715519563}
   upgradeableObjectUITransform: {fileID: 1439818919617473113}
   objectName: {fileID: 7086004152844880709}
@@ -2698,7 +2699,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 130}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 0, y: 15}
   m_Constraint: 2
   m_ConstraintCount: 5
 --- !u!1 &5327965732535660032

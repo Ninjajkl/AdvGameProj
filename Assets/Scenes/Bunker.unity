@@ -9344,6 +9344,11 @@ PrefabInstance:
       objectReference: {fileID: 1056181963}
     - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
+      propertyPath: armScript
+      value: 
+      objectReference: {fileID: 1769746206}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
       propertyPath: refineryObject
       value: 
       objectReference: {fileID: 1056181963}
@@ -9351,6 +9356,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211447478824169728, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5327965732535660032, guid: e45ea74222def9240856d4388410b64a,
         type: 3}

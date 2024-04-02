@@ -36,6 +36,11 @@ public class Refinery : Interactable
         HoveredOver(false);
     }
 
+    public void ShowRefineryMenu()
+    {
+        gameManager.PlayerUI.ShowRefineryMenu();
+    }
+
     public void Refine(RefineryRecipe refineryRecipe, int amountRefined)
     {
         (int amountRaw, int amountCoal) = TotalRawNeeded(refineryRecipe, amountRefined);

@@ -153,6 +153,10 @@ public class PlayerController : MonoBehaviour
                     {
                         upgradeableObject.FixObject();
                     }
+                    if (Input.GetKeyDown(KeyCode.E) && interactableObject is Refinery refineryObject)
+                    {
+                        refineryObject.ShowRefineryMenu();
+                    }
                     break;
                 }
             }
@@ -232,12 +236,7 @@ public class PlayerController : MonoBehaviour
             inventoryMenuOn = !inventoryMenuOn;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            gameManager.PlayerUI.ShowRefineryMenu();
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             gameManager.PlayerUI.ShowPauseMenu();
         }
