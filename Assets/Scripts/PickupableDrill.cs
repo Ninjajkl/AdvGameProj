@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using static Constants;
 
-public class PickupableDrill : MonoBehaviour
+public class PickupableDrill : Interactable
 {
     [SerializeField]
     private GameObject Drill;
@@ -26,46 +26,32 @@ public class PickupableDrill : MonoBehaviour
 
     private void Start()
     {
-        //Set Drill Layer to Unselected by default
-        Drill.layer = 6;
+        HoveredOver(false);
     }
 
-    public void FixObject()
+    public void PickupDrill()
     {
         Drill.SetActive(false);
         //TODO, actually show drill for player
-
-        /*
-        if (!objectFixed && HaveEnoughMaterials())
-        {
-            objectFixed = true;
-            fixedState.SetActive(true);
-            brokenState.SetActive(false);
-
-            gameManager.Player.ApplyUpgrade(upgradeType, upgradeLevel);
-            gameManager.PlayerUI.HideUpgradableObjectMenu();
-        }
-        */
+        //Should also remove this from the game as no longer needed
     }
 
-    public void HoveredOver(bool hovering)
+    public override void HoveredOver(bool hovering)
     {
-        int newLayer;
-
-        //Check if is being hovered over, then set appropriate layer
-        if (hovering)
+        int newLayer = 0;
+        //if too far from player, turn off outline
+        if (!nearPlayer)
         {
-            newLayer = 7;
-            //gameManager.PlayerUI.ShowUpgradableObjectMenu(this);
+            newLayer = 0;
         }
+        //Otherwise, turn on unselected outline
         else
         {
             newLayer = 6;
-            //gameManager.PlayerUI.HideUpgradableObjectMenu();
         }
-        if (Drill.layer != newLayer)
+        if (transform.gameObject.layer != newLayer)
         {
-            Drill.layer = newLayer;
+            SetLayerRecursively(transform, newLayer);
         }
     }
 }

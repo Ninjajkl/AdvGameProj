@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+    public bool nearPlayer = false;
     public void SetLayerRecursively(Transform parent, int layer)
     {
         //Set the layer of the parent GameObject

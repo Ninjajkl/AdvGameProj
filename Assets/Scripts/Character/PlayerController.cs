@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
         //If hit something
         if (collider != null)
         {
-            Type[] interactableTypes = { typeof(UpgradeableObject), typeof(Workbench), typeof(Refinery) };
+            Type[] interactableTypes = { typeof(UpgradeableObject), typeof(Workbench), typeof(Refinery), typeof(PickupableDrill) };
             foreach (Type type in interactableTypes)
             {
                 Interactable interactableObject = collider.GetComponentInParent(type) as Interactable;
@@ -152,6 +152,10 @@ public class PlayerController : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E) && interactableObject is UpgradeableObject upgradeableObject)
                     {
                         upgradeableObject.FixObject();
+                    }
+                    if (Input.GetKeyDown(KeyCode.E) && interactableObject is Refinery refineryObject)
+                    {
+                        refineryObject.ShowRefineryMenu();
                     }
                     break;
                 }
@@ -230,6 +234,11 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.PlayerUI.ShowInventory();
             inventoryMenuOn = !inventoryMenuOn;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameManager.PlayerUI.ShowPauseMenu();
         }
     }
 

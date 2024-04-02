@@ -9,6 +9,7 @@ public class Refinery : Interactable
     [System.Serializable]
     public class RefineryRecipe
     {
+        public int coalForRefined;
         public MaterialEnum rawMaterial;
         public int rawForRefined;
         public MaterialEnum refinedMaterial;
@@ -32,48 +33,74 @@ public class Refinery : Interactable
 
     private void Start()
     {
-        SetLayerRecursively(transform, 6);
+        HoveredOver(false);
+    }
+
+    public void ShowRefineryMenu()
+    {
+        gameManager.PlayerUI.ShowRefineryMenu();
     }
 
     public void Refine(RefineryRecipe refineryRecipe, int amountRefined)
     {
-        int amountRaw = TotalRawNeeded(refineryRecipe, amountRefined);
-        if (HaveEnoughMaterials(refineryRecipe, amountRefined))
+        (int amountRaw, int amountCoal) = TotalRawNeeded(refineryRecipe, amountRefined);
+        if (HaveEnoughMaterials(refineryRecipe, amountRefined, amountCoal))
         {
-            RemoveRawFromInventory(refineryRecipe, amountRaw);
-            AddRefinedToInventory(refineryRecipe, amountRefined);
+            RemoveMaterialFromInventory(refineryRecipe.rawMaterial, amountRaw);
+            RemoveMaterialFromInventory(MaterialEnum.Coal, amountCoal);
+            AddMaterialToInventory(refineryRecipe.refinedMaterial, amountRefined);
         }
     }
 
-    public bool HaveEnoughMaterials(RefineryRecipe refineryRecipe, int amountRaw)
+    public bool HaveEnoughMaterials(RefineryRecipe refineryRecipe, int amountRaw, int amountCoal)
     {
-        if (gameManager.Player.Inventory[(int)refineryRecipe.rawMaterial] < amountRaw)
+        int inventoryRawMaterial = gameManager.Player.Inventory[(int)refineryRecipe.rawMaterial];
+        int inventoryCoal = gameManager.Player.Inventory[(int)MaterialEnum.Coal];
+        if (inventoryRawMaterial < amountRaw || inventoryCoal < amountCoal)
         {
             return false;
         }
         return true;
     }
 
-    public int TotalRawNeeded(RefineryRecipe refineryRecipe, int amountRefined)
+    public (int, int) TotalRawNeeded(RefineryRecipe refineryRecipe, int amountRefined)
     {
-        return amountRefined * refineryRecipe.rawForRefined;
+        return (amountRefined * refineryRecipe.rawForRefined, amountRefined * refineryRecipe.coalForRefined);
     }
 
-    public void RemoveRawFromInventory(RefineryRecipe refineryRecipe, int amountRaw)
+    public void RemoveMaterialFromInventory(MaterialEnum material, int amount)
     {
-        gameManager.Player.Inventory[(int)refineryRecipe.rawMaterial] -= amountRaw;
+        gameManager.Player.Inventory[(int)material] -= amount;
         gameManager.PlayerUI.updateInventoryOnClick.Invoke();
     }
 
-    public void AddRefinedToInventory(RefineryRecipe refineryRecipe, int amountRefined)
+    public void AddMaterialToInventory(MaterialEnum material, int amount)
     {
-        gameManager.Player.Inventory[(int)refineryRecipe.refinedMaterial] += amountRefined;
+        gameManager.Player.Inventory[(int)material] += amount;
         gameManager.PlayerUI.updateInventoryOnClick.Invoke();
     }
 
     public override void HoveredOver(bool hovering)
     {
-        //Right now, do nothing
-        return;
+        int newLayer = 0;
+        //if too far from player, turn off outline
+        if (!nearPlayer)
+        {
+            newLayer = 0;
+        }
+        else if (hovering)
+        {
+            //Check if the player is looking at it
+            newLayer = 7;
+        }
+        //Otherwise, turn on unselected outline
+        else
+        {
+            newLayer = 6;
+        }
+        if (transform.gameObject.layer != newLayer)
+        {
+            SetLayerRecursively(transform, newLayer);
+        }
     }
 }

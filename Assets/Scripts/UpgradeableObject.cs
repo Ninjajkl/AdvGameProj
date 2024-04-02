@@ -46,9 +46,7 @@ public class UpgradeableObject : Interactable
         brokenState.SetActive(true);
         fixedState.SetActive(false);
         objectFixed = false;
-        //Set brokenState Layer to Unselected by default
-        //brokenState.layer = 6;
-        SetLayerRecursively(brokenState.transform, 6);
+        HoveredOver(false);
     }
 
     public void FixObject()
@@ -95,8 +93,13 @@ public class UpgradeableObject : Interactable
         }
         int newLayer;
 
+        //if too far from player, turn off outline
+        if (!nearPlayer)
+        {
+            newLayer = 0;
+        }
         //Check if is being hovered over 
-        if (hovering)
+        else if (hovering)
         {
             //Check if the player has enough resources to upgrade
             newLayer = HaveEnoughMaterials() ? 7 : 8;
