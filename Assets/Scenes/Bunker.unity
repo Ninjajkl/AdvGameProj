@@ -9310,6 +9310,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerHUDAudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 549602858793504100, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 549602858793504100, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 549602858793504100, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 629164423273866638, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 629164423273866638, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 629164423273866638, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1174814250924253554, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
       propertyPath: m_Volume
@@ -9385,6 +9415,16 @@ PrefabInstance:
       propertyPath: refineryObject
       value: 
       objectReference: {fileID: 1056181963}
+    - target: {fileID: 2553940969062404905, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553940969062404905, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3689211901569738435, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
       propertyPath: m_Enabled
@@ -9394,6 +9434,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898870772133159530, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898870772133159530, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927709613460491883, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927709613460491883, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651006225616362201, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651006225616362201, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651006225616362201, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5719634579030191245, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
@@ -9405,46 +9480,40 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6620865546130821897, guid: e45ea74222def9240856d4388410b64a,
+    - target: {fileID: 5733476369766495834, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
-      propertyPath: sounds.Array.size
-      value: 2
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6620865546130821897, guid: e45ea74222def9240856d4388410b64a,
+    - target: {fileID: 5733476369766495834, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
-      propertyPath: sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 75a3cb3c8748e9649acb0c94c822b1cf, type: 3}
-    - target: {fileID: 6620865546130821897, guid: e45ea74222def9240856d4388410b64a,
-        type: 3}
-      propertyPath: sounds.Array.data[1].name
-      value: InputChanged
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6620865546130821897, guid: e45ea74222def9240856d4388410b64a,
+    - target: {fileID: 5942609806235445558, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
-      propertyPath: sounds.Array.data[1].pitch
-      value: 1
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6620865546130821897, guid: e45ea74222def9240856d4388410b64a,
+    - target: {fileID: 5942609806235445558, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
-      propertyPath: sounds.Array.data[1].volume
-      value: 0.75
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6620865546130821897, guid: e45ea74222def9240856d4388410b64a,
+    - target: {fileID: 5942609806235445558, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
-      propertyPath: sounds.Array.data[1].mixerGroup
-      value: 
-      objectReference: {fileID: 342295590231037942, guid: 80836a7134546af469314acfa8c56f58,
-        type: 2}
-    - target: {fileID: 6620865546130821897, guid: e45ea74222def9240856d4388410b64a,
-        type: 3}
-      propertyPath: sounds.Array.data[1].pitchVariance
-      value: 0.1
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6620865546130821897, guid: e45ea74222def9240856d4388410b64a,
+    - target: {fileID: 6773957722934171249, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
-      propertyPath: sounds.Array.data[1].volumeVariance
-      value: 0.1
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773957722934171249, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

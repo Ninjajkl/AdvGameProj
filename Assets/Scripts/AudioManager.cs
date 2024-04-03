@@ -27,18 +27,22 @@ public class AudioManager : MonoBehaviour
 			{
                 s.source.outputAudioMixerGroup = s.mixerGroup;
             }
+			Debug.Log(s.name);
 		}
 	}
 
-	public void Play(string sound)
+	public void Play(string name)
 	{
-		Sound s = Array.Find(sounds, item => item.name == sound);
+		Sound s = Array.Find(sounds, item => item.name == name);
 		if (s == null)
 		{
 			Debug.LogWarning("Sound: " + name + " not found!");
 			return;
 		}
-
+		if(s.source.isPlaying)
+		{
+			return;
+		}
 		s.source.volume = s.volume * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
 		s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
 
