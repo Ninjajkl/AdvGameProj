@@ -14,7 +14,14 @@ public class Constants
         Gold,
         Uranium,
         Bedrock,
-        Horror
+        Refined_Copper,
+        Refined_Iron,
+        Refined_Aluminum,
+        Refined_Gold,
+        Enriched_Uranium,
+        Horror1,
+        Horror2,
+        Horror3
     }
 
     public enum UpgradeType

@@ -36,15 +36,18 @@ public class PlayerUIController : MonoBehaviour
     public TMP_Text drillPrompt;
 
     [Header("Inventory UI Variables")]
+    // Holds references to all useable sprites
+    public List<Sprite> materialSprites;
     public GameObject inventoryUI;
     public GameObject inventorySlotPrefab;
-    public InventorySlotManager inventorySlotManager; // For Big Inventory
+    public List<InventorySlotManager> inventorySlotManagers; // For Big Inventory
     public Transform slotGridGroup;
 
     [Header("Side Inventory UI Variables")]
     public GameObject sideInventoryUI;
     public Transform sideSlotGridGroup;
-    public List<InventorySlotManager> inventorySlotManagers; // For Side Inventory (Maybe will refactor later??)
+    public GameObject miniInventorySlotPrefab;
+    public List<InventorySlotManager> miniInventorySlotManagers; // For Side Inventory
     public UnityEvent updateInventoryOnClick;
 
     [Header("Refinery IU Variables")]
@@ -62,7 +65,7 @@ public class PlayerUIController : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.PlayerUI = this;
-        InitializeMiniInventorySystem();
+        InitializeInventorySystem();
         InitializeRefinerySystem();
     }
 
@@ -130,59 +133,68 @@ public class PlayerUIController : MonoBehaviour
 
     #region Inventory UI Functions
 
-    public void ShowInventory()
-    {
-        if (playerController.inventoryMenuOn == false)
-        {
-            inventoryUI.SetActive(true);
-
-            // Reset all inventory slots
-            foreach (Transform child in slotGridGroup)
-            {
-                Destroy(child.gameObject);
-            }
-
-            // Add slots with existing material into inventory
-            for (int i = 0; i < playerController.Inventory.Length; i++)
-            {
-                if (playerController.Inventory[i] > 0)
-                {
-                    Instantiate(inventorySlotPrefab, slotGridGroup);
-                    inventorySlotManager.slotName.text = $"{ConvertIntToMaterialEnum(i)}";
-                    inventorySlotManager.slotQuantity.text = $"{playerController.Inventory[i]}";
-                }
-            }
-
-        }
-        else
-        {
-            inventoryUI.SetActive(false);
-        }
-    }
-
-    public void InitializeMiniInventorySystem()
+    public void InitializeInventorySystem()
     {
         for (int i = 0; i < playerController.Inventory.Length; i++)
         {
+            InventorySlotManager inventorySlot = gameObject.AddComponent<InventorySlotManager>();
+            inventorySlotManagers.Add(inventorySlot);
+        }
+
+        for (int i = 0; i < 7; i++)
+        {
             InventorySlotManager miniInventorySlot = gameObject.AddComponent<InventorySlotManager>();
-            inventorySlotManagers.Add(miniInventorySlot);
+            miniInventorySlotManagers.Add(miniInventorySlot);
         }
 
         updateInventoryOnClick.AddListener(UpdateInventoryDynamic);
     }
 
+    public void ShowInventory()
+    {
+        if (playerController.inventoryMenuOn == false)
+        {
+            inventoryUI.SetActive(true);
+            sideInventoryUI.SetActive(false);
+        }
+        else
+        {
+            inventoryUI.SetActive(false);
+            sideInventoryUI.SetActive(true);
+        }
+    }
+
     public void UpdateInventoryDynamic()
     {
+        // Updates the Inventory Slots of the first 7 materials
+        for (int i = 0; i < 7; i++)
+        {
+            if (playerController.Inventory[i] > 0)
+            {
+                if (miniInventorySlotManagers[i].instianiated == false)
+                {
+                    GameObject inventorySlot = Instantiate(miniInventorySlotPrefab, sideSlotGridGroup);
+                    miniInventorySlotManagers[i] = inventorySlot.GetComponent<InventorySlotManager>();
+                    miniInventorySlotManagers[i].slotQuantity.text = $"{playerController.Inventory[i]}";
+                    miniInventorySlotManagers[i].slotIcon.sprite = materialSprites[i];
+                    miniInventorySlotManagers[i].instianiated = true;
+                }
+                miniInventorySlotManagers[i].slotQuantity.text = $"{playerController.Inventory[i]}";
+            }
+        }
+
+        // Updates for big inventory menu
         for (int i = 0; i < playerController.Inventory.Length; i++)
         {
             if (playerController.Inventory[i] > 0)
             {
                 if (inventorySlotManagers[i].instianiated == false)
                 {
-                    GameObject inventorySlot = Instantiate(inventorySlotPrefab, sideSlotGridGroup);
+                    GameObject inventorySlot = Instantiate(inventorySlotPrefab, slotGridGroup);
                     inventorySlotManagers[i] = inventorySlot.GetComponent<InventorySlotManager>();
                     inventorySlotManagers[i].slotName.text = $"{ConvertIntToMaterialEnum(i)}";
                     inventorySlotManagers[i].slotQuantity.text = $"{playerController.Inventory[i]}";
+                    inventorySlotManagers[i].slotIcon.sprite = materialSprites[i];
                     inventorySlotManagers[i].instianiated = true;
                 }
                 inventorySlotManagers[i].slotQuantity.text = $"{playerController.Inventory[i]}";
@@ -245,15 +257,20 @@ public class PlayerUIController : MonoBehaviour
                 refinerySlots[i].neededCoalText.text = $"{refineryObject.refineryRecipies[i].coalForRefined} Coal";
                 refinerySlots[i].neededMaterialText.text = $"{refineryObject.refineryRecipies[i].rawForRefined} {refineryObject.refineryRecipies[i].rawMaterial}";
                 refinerySlots[i].refinedMaterialQuantityText.text = $"1 {refineryObject.refineryRecipies[i].refinedMaterial}";
+                refinerySlots[i].neededMaterialImage.sprite = materialSprites[(int)refineryObject.refineryRecipies[i].rawMaterial];
+                refinerySlots[i].refinedMaterialImage.sprite = materialSprites[(int)refineryObject.refineryRecipies[i].refinedMaterial];
                 refinerySlots[i].instianiated = true;
             }
             int multiple = int.Parse(refinerySlots[i].refinedQuantityInputField.text);
+
             refinerySlots[i].refineButton.onClick.RemoveAllListeners();
             refinerySlots[i].refineButton.onClick.AddListener(() => refineryObject.Refine(refineryObject.refineryRecipies[index], multiple));
+
             refinerySlots[i].refinedMaterialText.text = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
             refinerySlots[i].neededCoalText.text = $"{refineryObject.refineryRecipies[i].coalForRefined * multiple} Coal";
             refinerySlots[i].neededMaterialText.text = $"{refineryObject.refineryRecipies[i].rawForRefined * multiple} {refineryObject.refineryRecipies[i].rawMaterial}";
             refinerySlots[i].refinedMaterialQuantityText.text = $"{multiple} {refineryObject.refineryRecipies[i].refinedMaterial}";
+
             if (!refineryObject.HaveEnoughMaterials(refineryObject.refineryRecipies[i], refineryObject.refineryRecipies[i].rawForRefined * multiple, refineryObject.refineryRecipies[i].coalForRefined * multiple))
             {
                 refinerySlots[i].refineButton.interactable = false;
@@ -270,7 +287,7 @@ public class PlayerUIController : MonoBehaviour
         //Debug.Log($"Num = {inputNum}");
         if (string.IsNullOrEmpty(inputNum) || inputNum == "-")
         {
-            Debug.Log($"Input Invalid!");
+            //Debug.Log($"Input Invalid!");
             refinerySlots[index].refinedQuantityInputField.text = "1";
             refinerySlots[index].refinedQuantityInputField.textComponent.text = "1";
         }
