@@ -9,8 +9,6 @@ public class PickupableDrill : Interactable
     [SerializeField]
     private GameObject Drill;
 
-    private GameManager gameManager;
-
     /*
      * Some gross hard-coded layer values
      * 0 - Default
@@ -19,10 +17,6 @@ public class PickupableDrill : Interactable
      * 8 - OutlineNonUpgradeable
      */
 
-    void Awake()
-    {
-        gameManager = GameManager.Instance;
-    }
 
     private void Start()
     {

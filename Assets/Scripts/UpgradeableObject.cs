@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using static Constants;
+using Unity.VisualScripting;
+using UnityEngine.Audio;
 
 public class UpgradeableObject : Interactable
 {
@@ -25,7 +27,6 @@ public class UpgradeableObject : Interactable
     private GameObject fixedState;
 
     private bool objectFixed = false;
-    private GameManager gameManager;
 
     /*
      * Some gross hard-coded layer values
@@ -34,11 +35,6 @@ public class UpgradeableObject : Interactable
      * 7 - OutlineUpgradeable
      * 8 - OutlineNonUpgradeable
      */
-
-    void Awake()
-    {
-        gameManager = GameManager.Instance;
-    }
 
     private void Start()
     {
@@ -60,6 +56,7 @@ public class UpgradeableObject : Interactable
             RemoveMaterialsFromInventory();
             gameManager.Player.ApplyUpgrade(upgradeType, upgradeLevel);
             gameManager.PlayerUI.HideUpgradableObjectMenu();
+            audioSource.Play();
         }
     }
     

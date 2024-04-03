@@ -16,7 +16,6 @@ public class Refinery : Interactable
     }
 
     public RefineryRecipe[] refineryRecipies;
-    private GameManager gameManager;
 
     /*
      * Some gross hard-coded layer values
@@ -25,11 +24,6 @@ public class Refinery : Interactable
      * 7 - OutlineUpgradeable
      * 8 - OutlineNonUpgradeable
      */
-
-    void Awake()
-    {
-        gameManager = GameManager.Instance;
-    }
 
     private void Start()
     {

@@ -21,7 +21,6 @@ public class Workbench : Interactable
     }
 
     public WorkbenchUpgrade[] workbenchUpgrades;
-    private GameManager gameManager;
 
     /*
      * Some gross hard-coded layer values
@@ -30,11 +29,6 @@ public class Workbench : Interactable
      * 7 - OutlineUpgradeable
      * 8 - OutlineNonUpgradeable
      */
-
-    void Awake()
-    {
-        gameManager = GameManager.Instance;
-    }
 
     private void Start()
     {

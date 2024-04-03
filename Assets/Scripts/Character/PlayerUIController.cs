@@ -12,6 +12,8 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
     [SerializeField]
+    private AudioManager playerHUDAudioManager;
+    [SerializeField]
     private ArmScript armScript;
 
     [Header("Upgradable Object UI Variables")]
@@ -252,6 +254,7 @@ public class PlayerUIController : MonoBehaviour
                 refinerySlots[i] = refineryslot.GetComponent<RefinerySlot>();
                 refinerySlots[i].refinedQuantityInputField = refineryslot.GetComponentInChildren<TMP_InputField>();
                 refinerySlots[i].refinedQuantityInputField.onValueChanged.AddListener(inputNum => OnInputChanged(inputNum, index));
+                refinerySlots[i].refinedQuantityInputField.onValueChanged.AddListener(inputNum => playerHUDAudioManager.Play("InputChanged"));
 
                 refinerySlots[i].refinedMaterialText.text = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
                 refinerySlots[i].neededCoalText.text = $"{refineryObject.refineryRecipies[i].coalForRefined} Coal";
@@ -265,6 +268,7 @@ public class PlayerUIController : MonoBehaviour
 
             refinerySlots[i].refineButton.onClick.RemoveAllListeners();
             refinerySlots[i].refineButton.onClick.AddListener(() => refineryObject.Refine(refineryObject.refineryRecipies[index], multiple));
+            refinerySlots[i].refineButton.onClick.AddListener(() => playerHUDAudioManager.Play("Click"));
 
             refinerySlots[i].refinedMaterialText.text = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
             refinerySlots[i].neededCoalText.text = $"{refineryObject.refineryRecipies[i].coalForRefined * multiple} Coal";

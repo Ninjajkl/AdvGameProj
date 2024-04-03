@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     //Character-Specific variables
     [Header("Character-Specific variables")]
+    public AudioSource jetpackAudio;
+    public AudioSource feetAudio;
     public Light flashlight;
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
@@ -181,6 +183,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Jump") && canMove)
         {
+            if (!jetpackAudio.isPlaying)
+            {
+                jetpackAudio.Play();
+            }
             if (characterController.isGrounded)
             {
                 moveDirection.y = jumpSpeed;
@@ -192,6 +198,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            jetpackAudio.Stop();
             moveDirection.y = movementDirectionY;
         }
 
@@ -201,6 +208,19 @@ public class PlayerController : MonoBehaviour
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
+        }
+
+        //If player IS Grounded and is moving, make walking sounds
+        if (characterController.isGrounded && (!curSpeedX.Equals(0) || !curSpeedZ.Equals(0)))
+        {
+            if (!feetAudio.isPlaying)
+            {
+                feetAudio.Play();
+            }
+        }
+        else
+        {
+            feetAudio.Stop();
         }
 
         // Move the controller
