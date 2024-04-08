@@ -246,7 +246,17 @@ public class PlayerController : MonoBehaviour
         //If flashlight is useable, you can enable and disable it with 'V'
         if (Input.GetKeyDown(KeyCode.V) && flashlightUsable == true)
         {
-            flashlight.enabled = !flashlight.enabled;
+            if (!flashlight.enabled)
+            {
+                GameManager.Instance.PlayerUI.playerHUDAudioManager.Play("Flash");
+                flashlight.enabled = true;
+            }
+            else
+            {
+                GameManager.Instance.PlayerUI.playerHUDAudioManager.Play("NoFlash");
+                flashlight.enabled = false;
+            }
+
             gameManager.PlayerUI.DisplayFlashlightPrompt(this);
         }
 

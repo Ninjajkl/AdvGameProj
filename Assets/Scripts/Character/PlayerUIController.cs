@@ -12,7 +12,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
     [SerializeField]
-    private AudioManager playerHUDAudioManager;
+    public AudioManager playerHUDAudioManager;
     [SerializeField]
     private ArmScript armScript;
 
