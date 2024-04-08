@@ -79,27 +79,20 @@ public class Chunk : MonoBehaviour
         if (value == newValue)
             return;
 
-        if(ChunkManager.Instance.editorMode == true)
+        // If trying to break something harder than the drill, don't
+        if (matVal > hardness)
+        {
+            return;
+        }
+
+        if (ChunkManager.Instance.editorMode == true)
         {
             // Can break bedrock, does not go to inventory
         }
         else
         {
-            // If trying to break bedrock, don't
-            //if (matVal == (int)MaterialEnum.Bedrock)
-            //{
-            //    return;
-            //}
-            // If trying to break something harder than the drill, don't
-            if (matVal > hardness)
-            {
-                return;
-            }
             // Add material to inventory otherwise
-            else
-            {
-                GameManager.Instance.Player.Inventory[matVal] += 1;
-            }
+            GameManager.Instance.Player.Inventory[matVal] += 1;
         }
 
         data[byteIndex] = (byte)newValue;
