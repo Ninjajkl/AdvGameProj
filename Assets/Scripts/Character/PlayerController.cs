@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                moveDirection.y = jetpackSpeed.y;
+                moveDirection.y += jetpackSpeed.y;
             }
         }
         else
@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
-        if (!characterController.isGrounded)
+        if (!characterController.isGrounded && (!chunkManager.editorMode || Input.GetKey(KeyCode.LeftShift)))
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour
 
         // Move the controller
         CollisionFlags flags = characterController.Move(moveDirection * Time.deltaTime);
-        if ((flags & CollisionFlags.Above) != 0)
+        if ((flags & CollisionFlags.Above) != 0 && !chunkManager.editorMode)
         {
             //If hitting the ceiling, next frame move character downwards
             moveDirection.y = -2.0f;
