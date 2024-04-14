@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Constants;
 
@@ -15,6 +16,8 @@ public class PlayerUIController : MonoBehaviour
     public AudioManager playerHUDAudioManager;
     [SerializeField]
     private ArmScript armScript;
+    [SerializeField]
+    private LevelManager levelManager;
 
     [Header("Upgradable Object UI Variables")]
     public GameObject upgradeableObjectUI;
@@ -256,7 +259,9 @@ public class PlayerUIController : MonoBehaviour
                 refinerySlots[i].refinedQuantityInputField.onValueChanged.AddListener(inputNum => OnInputChanged(inputNum, index));
                 refinerySlots[i].refinedQuantityInputField.onValueChanged.AddListener(inputNum => playerHUDAudioManager.Play("InputChanged"));
 
-                refinerySlots[i].refinedMaterialText.text = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
+                string refinedMaterialText = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
+                refinedMaterialText = refinedMaterialText.Replace("_", " ");
+                refinerySlots[i].refinedMaterialText.text = $"{refinedMaterialText}";
                 refinerySlots[i].neededCoalText.text = $"{refineryObject.refineryRecipies[i].coalForRefined} Coal";
                 refinerySlots[i].neededMaterialText.text = $"{refineryObject.refineryRecipies[i].rawForRefined} {refineryObject.refineryRecipies[i].rawMaterial}";
                 refinerySlots[i].refinedMaterialQuantityText.text = $"1 {refineryObject.refineryRecipies[i].refinedMaterial}";
@@ -270,10 +275,11 @@ public class PlayerUIController : MonoBehaviour
             refinerySlots[i].refineButton.onClick.AddListener(() => refineryObject.Refine(refineryObject.refineryRecipies[index], multiple));
             refinerySlots[i].refineButton.onClick.AddListener(() => playerHUDAudioManager.Play("Click"));
 
-            refinerySlots[i].refinedMaterialText.text = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
+            string instanRefinedMaterialText = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
+            instanRefinedMaterialText = instanRefinedMaterialText.Replace("_", " ");
             refinerySlots[i].neededCoalText.text = $"{refineryObject.refineryRecipies[i].coalForRefined * multiple} Coal";
             refinerySlots[i].neededMaterialText.text = $"{refineryObject.refineryRecipies[i].rawForRefined * multiple} {refineryObject.refineryRecipies[i].rawMaterial}";
-            refinerySlots[i].refinedMaterialQuantityText.text = $"{multiple} {refineryObject.refineryRecipies[i].refinedMaterial}";
+            refinerySlots[i].refinedMaterialQuantityText.text = $"{multiple} {instanRefinedMaterialText}";
 
             if (!refineryObject.HaveEnoughMaterials(refineryObject.refineryRecipies[i], refineryObject.refineryRecipies[i].rawForRefined * multiple, refineryObject.refineryRecipies[i].coalForRefined * multiple))
             {
@@ -353,7 +359,7 @@ public class PlayerUIController : MonoBehaviour
 
     public void GotoMainMenu()
     {
-        // TODO: Scene Manager
+        SceneManager.LoadScene(0);
     }
 
     public void ExitGame()

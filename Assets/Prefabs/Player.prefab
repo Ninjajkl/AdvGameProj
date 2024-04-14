@@ -2746,7 +2746,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8439941691841647297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1647354131454782868, guid: 5e0362f084e09fe41b2a38f0beecf124,
+          type: 3}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: LoadMainMenuScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3650707120026732141
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,7 +3066,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 1501085888585397169}
   playerHUDAudioManager: {fileID: 6620865546130821897}
-  armScript: {fileID: 0}
+  armScript: {fileID: 5230089882621481220}
+  levelManager: {fileID: 1647354131454782868, guid: 5e0362f084e09fe41b2a38f0beecf124,
+    type: 3}
   upgradeableObjectUI: {fileID: 8588993263715519563}
   upgradeableObjectUITransform: {fileID: 1439818919617473113}
   objectName: {fileID: 7086004152844880709}
@@ -3220,7 +3235,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6990003107585723375}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2333980419652328265}
+        m_TargetAssemblyTypeName: PlayerUIController, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4072617010257554632
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,9 +3557,9 @@ RectTransform:
   - {fileID: 6295434853445433877}
   m_Father: {fileID: 8253410594628008728}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -850, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 110, y: 0}
   m_SizeDelta: {x: 150, y: 950}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4661491997479952317

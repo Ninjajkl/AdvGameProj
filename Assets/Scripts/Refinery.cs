@@ -16,6 +16,7 @@ public class Refinery : Interactable
     }
 
     public RefineryRecipe[] refineryRecipies;
+    public PlayerUIController playerUIController;
 
     /*
      * Some gross hard-coded layer values
@@ -43,6 +44,7 @@ public class Refinery : Interactable
             RemoveMaterialFromInventory(refineryRecipe.rawMaterial, amountRaw);
             RemoveMaterialFromInventory(MaterialEnum.Coal, amountCoal);
             AddMaterialToInventory(refineryRecipe.refinedMaterial, amountRefined);
+            playerUIController.updateRefineryUI.Invoke();
         }
     }
 

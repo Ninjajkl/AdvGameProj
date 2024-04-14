@@ -11,12 +11,6 @@ public class RefinerySlot : MonoBehaviour
 
     }
 
-    /*public RefinerySlot(string slotName, int slotQuantity)
-    {
-        this.slotName.text = slotName;
-        this.slotQuantity.text = $"{slotQuantity}";
-    }*/
-
     public int index;
     public TMP_Text refinedMaterialText;
     public TMP_Text neededMaterialText;
