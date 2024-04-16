@@ -35,13 +35,14 @@ public class Workbench : Interactable
         HoveredOver(false);
     }
 
-    public void Fix(WorkbenchUpgrade workbenchUpgrade)
+    public void UpgradeDrill(WorkbenchUpgrade workbenchUpgrade)
     {
         if (HaveEnoughMaterials(workbenchUpgrade))
         {
             RemoveMaterialsFromInventory(workbenchUpgrade);
             gameManager.Player.ApplyUpgrade(workbenchUpgrade.upgradeType, workbenchUpgrade.upgradeLevel);
-            gameManager.PlayerUI.HideUpgradableObjectMenu();
+            gameManager.PlayerUI.workbenchSlot.index++;
+            gameManager.PlayerUI.updateWorkbenchUI.Invoke(); // TODO: Remove if doing animation slide
         }
     }
 
@@ -73,6 +74,11 @@ public class Workbench : Interactable
         if (!nearPlayer)
         {
             newLayer = 0;
+        }
+        else if (hovering)
+        {
+            //Check if the player is looking at it
+            newLayer = 7;
         }
         //Otherwise, turn on unselected outline
         else

@@ -55,13 +55,19 @@ public class PlayerUIController : MonoBehaviour
     public List<InventorySlotManager> miniInventorySlotManagers; // For Side Inventory
     public UnityEvent updateInventoryOnClick;
 
-    [Header("Refinery IU Variables")]
+    [Header("Refinery UI Variables")]
     public GameObject refineryUI;
     public Transform refineryGridGroup;
     public Refinery refineryObject;
     public GameObject refinerySlotPrefab;
     public List<RefinerySlot> refinerySlots;
     public UnityEvent updateRefineryUI;
+
+    [Header("Workbench UI Variables")]
+    public GameObject workbenchUI;
+    public Workbench workbenchObject;
+    public WorkbenchSlot workbenchSlot;
+    public UnityEvent updateWorkbenchUI;
 
     [Header("Pause UI Variables")]
     public GameObject pauseUI;
@@ -72,6 +78,7 @@ public class PlayerUIController : MonoBehaviour
         GameManager.Instance.PlayerUI = this;
         InitializeInventorySystem();
         InitializeRefinerySystem();
+        InitializeWorkbenchSystem();
     }
 
     #region Upgradable Object UI Functions
@@ -236,16 +243,6 @@ public class PlayerUIController : MonoBehaviour
         updateRefineryUI.AddListener(UpdateRefineryUIDynamic);
     }
 
-    public void ShowRefineryMenu()
-    {
-        refineryUI.SetActive(true);
-        playerController.enabled = false;
-        armScript.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        updateRefineryUI.Invoke();
-    }
-
     public void UpdateRefineryUIDynamic()
     {
         for (int i = 0; i < refineryObject.refineryRecipies.Length; i++)
@@ -314,9 +311,121 @@ public class PlayerUIController : MonoBehaviour
         updateRefineryUI.Invoke();
     }
 
+    public void ShowRefineryMenu()
+    {
+        refineryUI.SetActive(true);
+        playerController.enabled = false;
+        armScript.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        updateRefineryUI.Invoke();
+    }
+
     public void HideRefineryMenu()
     {
         refineryUI.SetActive(false);
+        playerController.enabled = true;
+        armScript.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    #endregion
+
+    #region Workbench UI Functions
+
+    public void InitializeWorkbenchSystem()
+    {
+        workbenchSlot.index = 0;
+        workbenchSlot.drillText.text = "Stone Drill";
+        workbenchSlot.neededMaterialImage1.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[0].materialType];
+        workbenchSlot.neededMaterialImage2.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[1].materialType];
+        workbenchSlot.neededMaterialImage3.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[2].materialType];
+
+        string neededMaterialText1 = $"{workbenchObject.workbenchUpgrades[0].neededMaterials[0].materialType}";
+        neededMaterialText1 = neededMaterialText1.Replace("_", " ");
+        string neededMaterialText2 = $"{workbenchObject.workbenchUpgrades[0].neededMaterials[0].materialType}";
+        neededMaterialText2 = neededMaterialText2.Replace("_", " ");
+        string neededMaterialText3 = $"{workbenchObject.workbenchUpgrades[0].neededMaterials[0].materialType}";
+        neededMaterialText3 = neededMaterialText3.Replace("_", " ");
+        workbenchSlot.neededMaterialText1.text = $"{workbenchObject.workbenchUpgrades[0].neededMaterials[0].amount} {neededMaterialText1}";
+        workbenchSlot.neededMaterialText2.text = $"{workbenchObject.workbenchUpgrades[0].neededMaterials[1].amount} {neededMaterialText2}";
+        workbenchSlot.neededMaterialText3.text = $"{workbenchObject.workbenchUpgrades[0].neededMaterials[2].amount} {neededMaterialText3}";
+
+        workbenchSlot.upgradeButton.onClick.AddListener(() => workbenchObject.UpgradeDrill(workbenchObject.workbenchUpgrades[workbenchSlot.index]));
+        workbenchSlot.upgradeButton.onClick.AddListener(() => playerHUDAudioManager.Play("Click"));
+        updateWorkbenchUI.AddListener(UpdateWorkbenchUIDynamic);
+    }
+
+    public void UpdateWorkbenchUIDynamic()
+    {
+        if (workbenchSlot.index >= workbenchObject.workbenchUpgrades.Length)
+        {
+            workbenchSlot.drillText.text = "All Upgraded";
+            workbenchSlot.neededMaterialImage1.enabled = false;
+            workbenchSlot.neededMaterialImage2.enabled = false;
+            workbenchSlot.neededMaterialImage3.enabled = false;
+            workbenchSlot.neededMaterialText1.enabled = false;
+            workbenchSlot.neededMaterialText2.enabled = false;
+            workbenchSlot.neededMaterialText3.enabled = false;
+            workbenchSlot.upgradeButton.gameObject.SetActive(false);
+            workbenchSlot.plus1.enabled = false;
+            workbenchSlot.plus2.enabled = false;
+        }
+        else
+        {
+            switch (workbenchSlot.index)
+            {
+                case 1:
+                    workbenchSlot.drillText.text = "Copper Drill";
+                    break;
+                case 2:
+                    workbenchSlot.drillText.text = "Steel Drill";
+                    break;
+                case 3:
+                    workbenchSlot.drillText.text = "Gold Drill";
+                    break;
+            }
+
+            workbenchSlot.neededMaterialImage1.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[0].materialType];
+            workbenchSlot.neededMaterialImage2.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[1].materialType];
+            workbenchSlot.neededMaterialImage3.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[2].materialType];
+
+            string neededMaterialText1 = $"{workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[0].materialType}";
+            neededMaterialText1 = neededMaterialText1.Replace("_", " ");
+            string neededMaterialText2 = $"{workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[1].materialType}";
+            neededMaterialText2 = neededMaterialText2.Replace("_", " ");
+            string neededMaterialText3 = $"{workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[2].materialType}";
+            neededMaterialText3 = neededMaterialText3.Replace("_", " ");
+            workbenchSlot.neededMaterialText1.text = $"{workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[0].amount} {neededMaterialText1}";
+            workbenchSlot.neededMaterialText2.text = $"{workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[1].amount} {neededMaterialText2}";
+            workbenchSlot.neededMaterialText3.text = $"{workbenchObject.workbenchUpgrades[workbenchSlot.index].neededMaterials[2].amount} {neededMaterialText3}";
+
+            if (!workbenchObject.HaveEnoughMaterials(workbenchObject.workbenchUpgrades[workbenchSlot.index]))
+            {
+                workbenchSlot.upgradeButton.interactable = false;
+            }
+            else
+            {
+                workbenchSlot.upgradeButton.interactable = true;
+            }
+        }
+    }
+
+
+    public void ShowWorkbenchMenu()
+    {
+        workbenchUI.SetActive(true);
+        playerController.enabled = false;
+        armScript.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        updateWorkbenchUI.Invoke();
+    }
+
+    public void HideWorkbenchMenu()
+    {
+        workbenchUI.SetActive(false);
         playerController.enabled = true;
         armScript.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
@@ -355,11 +464,6 @@ public class PlayerUIController : MonoBehaviour
     {
         pauseUI.SetActive(true);
         settingsUI.SetActive(false);
-    }
-
-    public void GotoMainMenu()
-    {
-        SceneManager.LoadScene(0);
     }
 
     public void ExitGame()

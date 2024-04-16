@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using static Constants;
-using Unity.VisualScripting;
 using UnityEngine.Audio;
 
 public class UpgradeableObject : Interactable
@@ -59,10 +58,10 @@ public class UpgradeableObject : Interactable
             audioSource.Play();
         }
     }
-    
+
     public bool HaveEnoughMaterials()
     {
-        foreach(var material in neededMaterials) 
+        foreach (var material in neededMaterials)
         {
             if (gameManager.Player.Inventory[(int)material.materialType] < material.amount)
             {
@@ -108,7 +107,7 @@ public class UpgradeableObject : Interactable
             newLayer = 6;
             gameManager.PlayerUI.HideUpgradableObjectMenu();
         }
-        if(brokenState.layer != newLayer)
+        if (brokenState.layer != newLayer)
         {
             SetLayerRecursively(brokenState.transform, newLayer);
             //brokenState.layer = newLayer;

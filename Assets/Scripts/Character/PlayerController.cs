@@ -69,8 +69,10 @@ public class PlayerController : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         gameManager.Player = this;
-        chunkManager = ChunkManager.Instance;
 
+        Time.timeScale = 1;
+
+        chunkManager = ChunkManager.Instance;
         Inventory = new int[Enum.GetValues(typeof(MaterialEnum)).Length];
         for (int i = 0; i < Inventory.Length; i++)
         {
@@ -155,9 +157,13 @@ public class PlayerController : MonoBehaviour
                     {
                         upgradeableObject.FixObject();
                     }
-                    if (Input.GetKeyDown(KeyCode.E) && interactableObject is Refinery refineryObject)
+                    if (Input.GetKeyDown(KeyCode.E) && interactableObject is Refinery)
                     {
-                        refineryObject.ShowRefineryMenu();
+                        gameManager.PlayerUI.ShowRefineryMenu();
+                    }
+                    if (Input.GetKeyDown(KeyCode.E) && interactableObject is Workbench)
+                    {
+                        gameManager.PlayerUI.ShowWorkbenchMenu();
                     }
                     break;
                 }
