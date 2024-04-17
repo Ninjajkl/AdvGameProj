@@ -313,6 +313,7 @@ MonoBehaviour:
   - {fileID: 1056181963}
   - {fileID: 1685762010}
   - {fileID: 1672383972}
+  - {fileID: 1051624852}
 --- !u!65 &47533721
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1370,10 +1371,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dd3ed4d73a3372e41aa41c91a314f90d,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1051624854}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dd3ed4d73a3372e41aa41c91a314f90d,
         type: 3}
       insertIndex: -1
@@ -9392,28 +9389,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1051624854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051624850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2b01ffef80f0ab4e84113a073812065, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nearPlayer: 0
-  refineryRecipies:
-  - coalForRefined: 1
-    rawMaterial: 3
-    rawForRefined: 4
-    refinedMaterial: 4
-  - coalForRefined: 50
-    rawMaterial: 0
-    rawForRefined: 100
-    refinedMaterial: 8
 --- !u!1001 &1053504748
 PrefabInstance:
   m_ObjectHideFlags: 0
