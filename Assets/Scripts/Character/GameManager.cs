@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Constants;
@@ -9,24 +10,38 @@ public class GameManager : Singleton<GameManager>
 {
     public PlayerController Player;
     public PlayerUIController PlayerUI;
-    //public int[] Inventory;
-    //Access each index with (int)MaterialEnum.Type
+    public RoomManager[] Rooms;
+    public int ObjectsToRepair = 0;
 
     public override void Awake()
     {
         base.Awake();
-        //Changed, Player must set itself when spawned
-        //Make sure Player is set. If not, find it and set it.
-        //if (Player == null)
-        //{
-        //    Player = FindObjectOfType<PlayerController>();
-        //}
+        Rooms = new RoomManager[0];
+    }
 
-        //Initialize the Inventory to have 0 of everything
-        //Inventory = new int[Enum.GetValues(typeof(MaterialEnum)).Length];
-        //for (int i = 0; i < Inventory.Length; i++)
-        //{
-        //    Inventory[i] = 0;
-        //}
+    public void AddRoom(RoomManager room)
+    {
+        Rooms = Rooms.Append(room).ToArray();
+        foreach (Interactable interactable in room.interactableObjects)
+        {
+            if (interactable is UpgradeableObject upgradeableObject)
+            {
+                ObjectsToRepair++;
+            }
+            else if (interactable is Workbench workbench)
+            {
+                ObjectsToRepair += workbench.workbenchUpgrades.Length;
+            }
+        }
+    }
+
+    public void ReduceRepairsLeft()
+    {
+        ObjectsToRepair--;
+        if(ObjectsToRepair == 0)
+        {
+            Debug.Log("All repairs complete!");
+            //TODO - Add end sequence
+        }
     }
 }

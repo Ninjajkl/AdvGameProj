@@ -56,6 +56,7 @@ public class UpgradeableObject : Interactable
             gameManager.Player.ApplyUpgrade(upgradeType, upgradeLevel);
             gameManager.PlayerUI.HideUpgradableObjectMenu();
             audioSource.Play();
+            gameManager.ReduceRepairsLeft();
         }
     }
 

@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 public class RoomManager : MonoBehaviour
 {
     [SerializeField]
-    private Interactable[] interactableObjects;
+    public Interactable[] interactableObjects;
+
+    protected void Awake()
+    {
+        GameManager.Instance.AddRoom(this);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

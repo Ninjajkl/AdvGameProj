@@ -12324,6 +12324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 583422473}
   PlayerUI: {fileID: 583422476}
+  Rooms: []
+  ObjectsToRepair: 0
 --- !u!4 &1330757027
 Transform:
   m_ObjectHideFlags: 0
