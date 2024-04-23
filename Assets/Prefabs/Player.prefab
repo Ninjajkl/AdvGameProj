@@ -3064,7 +3064,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 983561060407648659}
   - {fileID: 8253410594628008728}
   - {fileID: 8542531865660794979}
   - {fileID: 3339904516549436094}
@@ -3192,6 +3191,9 @@ MonoBehaviour:
   workbenchUI: {fileID: 5244725778332008731}
   workbenchObject: {fileID: 0}
   workbenchSlot: {fileID: 268219983899211589}
+  updateWorkbenchUI:
+    m_PersistentCalls:
+      m_Calls: []
   pauseUI: {fileID: 9079631839505140282}
   settingsUI: {fileID: 4758770709517105545}
 --- !u!1 &3955239563109453714
@@ -6071,6 +6073,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1465209637146027971}
+  - {fileID: 983561060407648659}
   m_Father: {fileID: 45556874559156523}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8073990717234047901
@@ -7910,7 +7913,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 45556874559156523}
+    m_TransformParent: {fileID: 8542531865660794979}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 88e71a7be36904a4aa2a3dc7a8515278,
         type: 3}
@@ -7935,7 +7938,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 88e71a7be36904a4aa2a3dc7a8515278,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.108
+      value: -0.53199995
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88e71a7be36904a4aa2a3dc7a8515278,
         type: 3}
