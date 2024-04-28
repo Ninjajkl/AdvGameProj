@@ -957,8 +957,6 @@ MonoBehaviour:
   upgradeType: 6
   upgradeLevel: 1
   neededMaterials:
-  - materialType: 0
-    amount: 2
   - materialType: 1
     amount: 4
   - materialType: 2
@@ -14087,12 +14085,6 @@ MonoBehaviour:
   upgradeType: 6
   upgradeLevel: 1
   neededMaterials:
-  - materialType: 0
-    amount: 8
-  - materialType: 1
-    amount: 16
-  - materialType: 2
-    amount: 32
   - materialType: 3
     amount: 64
   - materialType: 4
