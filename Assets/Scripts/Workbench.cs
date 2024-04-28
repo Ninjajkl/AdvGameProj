@@ -43,6 +43,7 @@ public class Workbench : Interactable
             gameManager.Player.ApplyUpgrade(workbenchUpgrade.upgradeType, workbenchUpgrade.upgradeLevel);
             gameManager.PlayerUI.workbenchSlot.index++;
             gameManager.PlayerUI.updateWorkbenchUI.Invoke(); // TODO: Remove if doing animation slide
+            gameManager.PlayerUI.updateInventoryOnClick.Invoke();
             gameManager.ReduceRepairsLeft();
         }
     }

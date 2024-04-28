@@ -266,12 +266,6 @@ public class PlayerController : MonoBehaviour
             gameManager.PlayerUI.DisplayFlashlightPrompt(this);
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            gameManager.PlayerUI.ShowInventory();
-            inventoryMenuOn = !inventoryMenuOn;
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gameManager.PlayerUI.ShowPauseMenu();

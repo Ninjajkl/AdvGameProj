@@ -43,16 +43,9 @@ public class PlayerUIController : MonoBehaviour
     [Header("Inventory UI Variables")]
     // Holds references to all useable sprites
     public List<Sprite> materialSprites;
-    public GameObject inventoryUI;
     public GameObject inventorySlotPrefab;
-    public List<InventorySlotManager> inventorySlotManagers; // For Big Inventory
-    public Transform slotGridGroup;
-
-    [Header("Side Inventory UI Variables")]
-    public GameObject sideInventoryUI;
     public Transform sideSlotGridGroup;
-    public GameObject miniInventorySlotPrefab;
-    public List<InventorySlotManager> miniInventorySlotManagers; // For Side Inventory
+    public List<InventorySlotManager> inventorySlotManagers;
     public UnityEvent updateInventoryOnClick;
 
     [Header("Refinery UI Variables")]
@@ -64,6 +57,7 @@ public class PlayerUIController : MonoBehaviour
     public UnityEvent updateRefineryUI;
 
     [Header("Workbench UI Variables")]
+    public List<Sprite> drillSprites;
     public GameObject workbenchUI;
     public Workbench workbenchObject;
     public WorkbenchSlot workbenchSlot;
@@ -152,59 +146,23 @@ public class PlayerUIController : MonoBehaviour
             InventorySlotManager inventorySlot = gameObject.AddComponent<InventorySlotManager>();
             inventorySlotManagers.Add(inventorySlot);
         }
-
-        for (int i = 0; i < 7; i++)
-        {
-            InventorySlotManager miniInventorySlot = gameObject.AddComponent<InventorySlotManager>();
-            miniInventorySlotManagers.Add(miniInventorySlot);
-        }
-
         updateInventoryOnClick.AddListener(UpdateInventoryDynamic);
-    }
-
-    public void ShowInventory()
-    {
-        if (playerController.inventoryMenuOn == false)
-        {
-            inventoryUI.SetActive(true);
-            sideInventoryUI.SetActive(false);
-        }
-        else
-        {
-            inventoryUI.SetActive(false);
-            sideInventoryUI.SetActive(true);
-        }
     }
 
     public void UpdateInventoryDynamic()
     {
         // Updates the Inventory Slots of the first 7 materials
-        for (int i = 0; i < 7; i++)
-        {
-            if (playerController.Inventory[i] > 0)
-            {
-                if (miniInventorySlotManagers[i].instianiated == false)
-                {
-                    GameObject inventorySlot = Instantiate(miniInventorySlotPrefab, sideSlotGridGroup);
-                    miniInventorySlotManagers[i] = inventorySlot.GetComponent<InventorySlotManager>();
-                    miniInventorySlotManagers[i].slotQuantity.text = $"{playerController.Inventory[i]}";
-                    miniInventorySlotManagers[i].slotIcon.sprite = materialSprites[i];
-                    miniInventorySlotManagers[i].instianiated = true;
-                }
-                miniInventorySlotManagers[i].slotQuantity.text = $"{playerController.Inventory[i]}";
-            }
-        }
-
-        // Updates for big inventory menu
         for (int i = 0; i < playerController.Inventory.Length; i++)
         {
             if (playerController.Inventory[i] > 0)
             {
                 if (inventorySlotManagers[i].instianiated == false)
                 {
-                    GameObject inventorySlot = Instantiate(inventorySlotPrefab, slotGridGroup);
+                    GameObject inventorySlot = Instantiate(inventorySlotPrefab, sideSlotGridGroup);
                     inventorySlotManagers[i] = inventorySlot.GetComponent<InventorySlotManager>();
-                    inventorySlotManagers[i].slotName.text = $"{ConvertIntToMaterialEnum(i)}";
+                    string slotName = $"{ConvertIntToMaterialEnum(i)}";
+                    slotName = slotName.Replace("_", " ");
+                    inventorySlotManagers[i].slotName.text = slotName;
                     inventorySlotManagers[i].slotQuantity.text = $"{playerController.Inventory[i]}";
                     inventorySlotManagers[i].slotIcon.sprite = materialSprites[i];
                     inventorySlotManagers[i].instianiated = true;
@@ -337,7 +295,8 @@ public class PlayerUIController : MonoBehaviour
     public void InitializeWorkbenchSystem()
     {
         workbenchSlot.index = 0;
-        workbenchSlot.drillText.text = "Stone Drill";
+        workbenchSlot.drillText.text = "Copper Drill";
+        workbenchSlot.drillImage.sprite = drillSprites[0];
         workbenchSlot.neededMaterialImage1.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[0].materialType];
         workbenchSlot.neededMaterialImage2.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[1].materialType];
         workbenchSlot.neededMaterialImage3.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[2].materialType];
@@ -377,13 +336,16 @@ public class PlayerUIController : MonoBehaviour
             switch (workbenchSlot.index)
             {
                 case 1:
-                    workbenchSlot.drillText.text = "Copper Drill";
+                    workbenchSlot.drillText.text = "Iron Drill";
+                    workbenchSlot.drillImage.sprite = drillSprites[1];
                     break;
                 case 2:
-                    workbenchSlot.drillText.text = "Steel Drill";
+                    workbenchSlot.drillText.text = "Aluminum Drill";
+                    workbenchSlot.drillImage.sprite = drillSprites[2];
                     break;
                 case 3:
                     workbenchSlot.drillText.text = "Gold Drill";
+                    workbenchSlot.drillImage.sprite = drillSprites[3];
                     break;
             }
 

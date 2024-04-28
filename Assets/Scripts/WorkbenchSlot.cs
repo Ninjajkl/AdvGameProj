@@ -13,6 +13,7 @@ public class WorkbenchSlot : MonoBehaviour
 
     public int index;
     public TMP_Text drillText;
+    public Image drillImage;
     public TMP_Text neededMaterialText1;
     public TMP_Text neededMaterialText2;
     public TMP_Text neededMaterialText3;
