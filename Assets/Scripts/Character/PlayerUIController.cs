@@ -32,7 +32,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField]
     private Button upgradeButton;
     //On-Screen Point
-    private Vector2 upgradeObjectUIDisplayPointA = new Vector2(-200, 0f);
+    private Vector2 upgradeObjectUIDisplayPointA = new Vector2(-50, 0f);
     //Off-Screen Point
     private Vector2 upgradeObjectUIDisplayPointB = new Vector2(200, 0f);
 
@@ -62,6 +62,11 @@ public class PlayerUIController : MonoBehaviour
     public Workbench workbenchObject;
     public WorkbenchSlot workbenchSlot;
     public UnityEvent updateWorkbenchUI;
+
+    [Header("Ending UI Variables")]
+    public GameObject endingPromptUI;
+    public RoomManager mineEntranceRoomManager;
+    public Interactable endWall;
 
     [Header("Pause UI Variables")]
     public GameObject pauseUI;
@@ -102,7 +107,9 @@ public class PlayerUIController : MonoBehaviour
 
     public void GetUpgradeableObjectInfo(UpgradeableObject highlightedObject)
     {
-        objectName.text = highlightedObject.gameObject.name;
+        string objName = highlightedObject.gameObject.name;
+        objName = objName.Replace("_", " ");
+        objectName.text = objName;
         upgradeText.text = $"+{highlightedObject.upgradeLevel} {highlightedObject.upgradeType}";
 
         if (highlightedObject.neededMaterials.Length == 0)
@@ -114,7 +121,9 @@ public class PlayerUIController : MonoBehaviour
             materialsList.text = "";
             for (int i = 0; i < highlightedObject.neededMaterials.Length; i++)
             {
-                materialsList.text += $"{highlightedObject.neededMaterials[i].amount} {highlightedObject.neededMaterials[i].materialType}\n";
+                string matName = $"{highlightedObject.neededMaterials[i].materialType}";
+                matName = matName.Replace("_", " ");
+                materialsList.text += $"{highlightedObject.neededMaterials[i].amount} {matName}\n";
             }
         }
     }
@@ -392,6 +401,29 @@ public class PlayerUIController : MonoBehaviour
         armScript.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    #endregion
+
+    #region Ending UI Functions
+
+    public void ShowEndingPromptUI()
+    {
+        endingPromptUI.SetActive(true);
+        playerController.enabled = false;
+        armScript.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void HideEndingPromptUI()
+    {
+        endingPromptUI.SetActive(false);
+        playerController.enabled = true;
+        armScript.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        endWall.gameObject.SetActive(true);
     }
 
     #endregion

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 using static Constants;
 
 public class GameManager : Singleton<GameManager>
@@ -12,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     public PlayerUIController PlayerUI;
     public RoomManager[] Rooms;
     public int ObjectsToRepair = 0;
+    public PlayableDirector endSequence;
 
     public override void Awake()
     {
@@ -38,10 +40,14 @@ public class GameManager : Singleton<GameManager>
     public void ReduceRepairsLeft()
     {
         ObjectsToRepair--;
-        if(ObjectsToRepair == 0)
+        if (ObjectsToRepair == 0)
         {
             Debug.Log("All repairs complete!");
-            //TODO - Add end sequence
+            PlayerUI.ShowEndingPromptUI();
+        }
+        else if (ObjectsToRepair == -1)
+        {
+            endSequence.Play();
         }
     }
 }

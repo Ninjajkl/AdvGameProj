@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    // Make sure you're scenes are in order for these!
+
     public void LoadMainMenuScene()
     {
         SceneManager.LoadScene(0);
@@ -28,5 +30,10 @@ public class LevelManager : MonoBehaviour
     public void LoadBunkerScene()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void LoadEndScene()
+    {
+        SceneManager.LoadScene(2);
     }
 }
