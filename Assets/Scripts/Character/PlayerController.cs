@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     private void TerrainInteraction()
     {
         //Terrain System
-        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))// || Input.GetMouseButton(1))
         {
 
             float modification = Input.GetMouseButton(1) ? modiferStrengh : -modiferStrengh;

@@ -35,6 +35,21 @@ public class ChunkManager : Singleton<ChunkManager>
     public void Initialize()
     {
         noiseManager = NoiseManager.Instance;
+
+        //Ensure a new map is used by deleting previous ones
+        string selectedWorldDir = WorldManager.GetSelectedWorldDir();
+
+        if (Directory.Exists(selectedWorldDir))
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(selectedWorldDir);
+            FileInfo[] files = directoryInfo.GetFiles();
+
+            foreach (FileInfo file in files)
+            {
+                file.Delete();
+            }
+        }
+
         if (useCameraPosition)
             player = Camera.main.transform;//Use the Camera.main as player pos
         else
