@@ -40,12 +40,12 @@ public class GameManager : Singleton<GameManager>
     public void ReduceRepairsLeft()
     {
         ObjectsToRepair--;
-        if (ObjectsToRepair == 0)
+        if (ObjectsToRepair == 1)
         {
             Debug.Log("All repairs complete!");
             PlayerUI.ShowEndingPromptUI();
         }
-        else if (ObjectsToRepair == -1)
+        else if (ObjectsToRepair == 0)
         {
             endSequence.Play();
         }

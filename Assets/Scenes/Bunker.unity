@@ -9702,7 +9702,6 @@ MonoBehaviour:
   - {fileID: 346799994}
   - {fileID: 836753149}
   - {fileID: 1896748742}
-  - {fileID: 0}
 --- !u!65 &1036084756
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12888,9 +12887,44 @@ PrefabInstance:
       objectReference: {fileID: 1051624852}
     - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
+      propertyPath: drillSprites.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
       propertyPath: mineEntranceRoomManager
       value: 
       objectReference: {fileID: 1160934097}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: drillSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: e25a78a47267eff4c9be84433a48d2c5,
+        type: 3}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: drillSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0f12161c473e553448925b31e44c5372,
+        type: 3}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: drillSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3f3a145155d942442a75dbce4e880886,
+        type: 3}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: drillSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: fac4e4e45d7595e4d87538c518c90925,
+        type: 3}
+    - target: {fileID: 2333980419652328265, guid: e45ea74222def9240856d4388410b64a,
+        type: 3}
+      propertyPath: drillSprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 61526992f2fa8074ab8be30b35602eb0,
+        type: 3}
     - target: {fileID: 2553940969062404905, guid: e45ea74222def9240856d4388410b64a,
         type: 3}
       propertyPath: m_AnchorMax.x

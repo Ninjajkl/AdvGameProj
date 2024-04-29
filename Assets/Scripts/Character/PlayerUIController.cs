@@ -307,7 +307,7 @@ public class PlayerUIController : MonoBehaviour
     public void InitializeWorkbenchSystem()
     {
         workbenchSlot.index = 0;
-        workbenchSlot.drillText.text = "Copper Drill";
+        workbenchSlot.drillText.text = "Stone Drill";
         workbenchSlot.drillImage.sprite = drillSprites[0];
         workbenchSlot.neededMaterialImage1.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[0].materialType];
         workbenchSlot.neededMaterialImage2.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[1].materialType];
@@ -348,16 +348,20 @@ public class PlayerUIController : MonoBehaviour
             switch (workbenchSlot.index)
             {
                 case 1:
-                    workbenchSlot.drillText.text = "Iron Drill";
+                    workbenchSlot.drillText.text = "Copper Drill";
                     workbenchSlot.drillImage.sprite = drillSprites[1];
                     break;
                 case 2:
-                    workbenchSlot.drillText.text = "Aluminum Drill";
+                    workbenchSlot.drillText.text = "Iron Drill";
                     workbenchSlot.drillImage.sprite = drillSprites[2];
                     break;
                 case 3:
-                    workbenchSlot.drillText.text = "Gold Drill";
+                    workbenchSlot.drillText.text = "Aluminum Drill";
                     workbenchSlot.drillImage.sprite = drillSprites[3];
+                    break;
+                case 4:
+                    workbenchSlot.drillText.text = "Gold Drill";
+                    workbenchSlot.drillImage.sprite = drillSprites[4];
                     break;
             }
 
