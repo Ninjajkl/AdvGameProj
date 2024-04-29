@@ -163,9 +163,9 @@ public class PlayerUIController : MonoBehaviour
         // Updates the Inventory Slots of the first 7 materials
         for (int i = 0; i < playerController.Inventory.Length; i++)
         {
-            if (playerController.Inventory[i] > 0)
+            if (inventorySlotManagers[i].instianiated == false)
             {
-                if (inventorySlotManagers[i].instianiated == false)
+                if (playerController.Inventory[i] > 0)
                 {
                     GameObject inventorySlot = Instantiate(inventorySlotPrefab, sideSlotGridGroup);
                     inventorySlotManagers[i] = inventorySlot.GetComponent<InventorySlotManager>();
@@ -176,6 +176,9 @@ public class PlayerUIController : MonoBehaviour
                     inventorySlotManagers[i].slotIcon.sprite = materialSprites[i];
                     inventorySlotManagers[i].instianiated = true;
                 }
+            }
+            else
+            {
                 inventorySlotManagers[i].slotQuantity.text = $"{playerController.Inventory[i]}";
             }
         }
