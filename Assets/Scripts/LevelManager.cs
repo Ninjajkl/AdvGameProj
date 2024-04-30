@@ -25,6 +25,9 @@ public class LevelManager : MonoBehaviour
     public void LoadMainMenuScene()
     {
         SceneManager.LoadScene(0);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 1;
     }
 
     public void LoadBunkerScene()
@@ -35,5 +38,6 @@ public class LevelManager : MonoBehaviour
     public void LoadEndScene()
     {
         SceneManager.LoadScene(2);
+        Time.timeScale = 1;
     }
 }
