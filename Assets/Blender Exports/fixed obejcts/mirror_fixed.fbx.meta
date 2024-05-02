@@ -3,7 +3,22 @@ guid: d82d2ab85cb86e642b299b6d1bc5bc5a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frame
+    second: {fileID: 2100000, guid: 444fce923d83af14f932d8627efbeff3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mirror
+    second: {fileID: 2100000, guid: 86e7527adafc14f419275b2784a83cfd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Post-It.001
+    second: {fileID: 2100000, guid: 2777c1ecf34da1e44876fbfcc84304b3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
