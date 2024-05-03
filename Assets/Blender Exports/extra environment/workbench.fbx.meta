@@ -3,7 +3,42 @@ guid: 1036ba9d979d27544a14b224d78f8360
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BluePrint
+    second: {instanceID: 0}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blueprint
+    second: {fileID: 2100000, guid: 0f2c252f91026024d8e7a813a7ba9717, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Clamp
+    second: {fileID: 2100000, guid: 154c36e4ba2146648bdc27d995a6bad5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: ac6f45a163dbe5846b9a1ec7dda8490a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TableLegs
+    second: {fileID: 2100000, guid: cd283984c6921064eb8f645c63ac4211, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WhiteWood
+    second: {fileID: 2100000, guid: a85ace57127c0ba498f039ce83423524, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WorkbenchBack
+    second: {fileID: 2100000, guid: 41a418328865ccf45b3f0783f8cd2f9e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
