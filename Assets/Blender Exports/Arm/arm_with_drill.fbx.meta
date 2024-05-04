@@ -3,7 +3,27 @@ guid: 88e71a7be36904a4aa2a3dc7a8515278
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Droll
+    second: {fileID: 2100000, guid: 5caeec9c81db1b64b9a6a8338ace3c3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hand
+    second: {fileID: 2100000, guid: dbb59acda0a983b41b4fcc8360e8998e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sleeve.001
+    second: {fileID: 2100000, guid: dcfe1cb3e948dcc44ba697dc03bcfcee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 2fb1bca3853c45942870533cab92b467, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

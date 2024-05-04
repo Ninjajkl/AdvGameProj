@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ArmScript : MonoBehaviour
 {
     [SerializeField] Animator arm_animator;
+
     void Update()
     {
         if(Input.GetMouseButton(0))
@@ -15,5 +17,6 @@ public class ArmScript : MonoBehaviour
         {
             arm_animator.SetBool("mining", false);
         }
+     
     }
 }
