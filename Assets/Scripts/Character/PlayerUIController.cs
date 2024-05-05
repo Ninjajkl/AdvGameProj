@@ -285,6 +285,7 @@ public class PlayerUIController : MonoBehaviour
     {
         refineryUI.SetActive(true);
         playerController.enabled = false;
+        playerController.StopSounds();
         armScript.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -295,6 +296,7 @@ public class PlayerUIController : MonoBehaviour
     {
         refineryUI.SetActive(false);
         playerController.enabled = true;
+        playerController.EnableSounds();
         armScript.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -395,6 +397,7 @@ public class PlayerUIController : MonoBehaviour
     {
         workbenchUI.SetActive(true);
         playerController.enabled = false;
+        playerController.StopSounds();
         armScript.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -405,6 +408,7 @@ public class PlayerUIController : MonoBehaviour
     {
         workbenchUI.SetActive(false);
         playerController.enabled = true;
+        playerController.EnableSounds();
         armScript.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

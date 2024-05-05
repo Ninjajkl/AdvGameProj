@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     [Header("Character-Specific variables")]
     public AudioSource jetpackAudio;
     public AudioSource feetAudio;
+    private bool soundsEnabled = true;
     public Light flashlight;
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
@@ -191,7 +192,10 @@ public class PlayerController : MonoBehaviour
         {
             if (!jetpackAudio.isPlaying)
             {
-                jetpackAudio.Play();
+                if (soundsEnabled) 
+                {
+                    jetpackAudio.Play();
+                }
             }
             if (characterController.isGrounded)
             {
@@ -219,7 +223,7 @@ public class PlayerController : MonoBehaviour
         //If player IS Grounded and is moving, make walking sounds
         if (characterController.isGrounded && (!curSpeedX.Equals(0) || !curSpeedZ.Equals(0)))
         {
-            if (!feetAudio.isPlaying)
+            if (!feetAudio.isPlaying && soundsEnabled)
             {
                 feetAudio.Play();
             }
@@ -307,6 +311,22 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Error: Unhandled upgrade");
                 break;
         }
+    }
+
+    #endregion
+
+    #region Misc Methods
+
+    public void StopSounds()
+    {
+        jetpackAudio.Stop();
+        feetAudio.Stop();
+        soundsEnabled = false;
+    }
+
+    public void EnableSounds()
+    {
+        soundsEnabled = true;
     }
 
     #endregion
