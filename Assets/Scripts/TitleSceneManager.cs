@@ -13,6 +13,8 @@ public class TitleSceneManager : MonoBehaviour
     public GameObject BedrockText;
     public GameObject VirtualCam1;
     public GameObject VirtualCam2;
+    public AudioSource nuke_aud;
+    public AudioSource amb_aud;
     public bool directionalLightOff;
     Quaternion zeroRotation = Quaternion.Euler(Vector3.zero);
 
@@ -73,6 +75,7 @@ public class TitleSceneManager : MonoBehaviour
     {
         HideMainUI();
         cutscene.Play();
+        nuke_aud.Play();
     }
 
     #region Camera Shaking Functions
