@@ -15,6 +15,8 @@ public class TitleSceneManager : MonoBehaviour
     public GameObject VirtualCam2;
     public AudioSource nuke_aud;
     public AudioSource amb_aud;
+    public AudioClip nuke_whistle;
+    public AudioClip nuke_boom;
     public bool directionalLightOff;
     Quaternion zeroRotation = Quaternion.Euler(Vector3.zero);
 
