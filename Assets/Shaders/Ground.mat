@@ -30,6 +30,7 @@ Material:
     - _Angle_Offset: 4
     - _Cell_Density: 2
     - _NoiseScalar: 5000
+    - _QueueControl: 0
     m_Colors:
     - _Color: {r: 0.7735849, g: 0.6627414, b: 0.47801697, a: 1}
   m_BuildTextureStacks: []

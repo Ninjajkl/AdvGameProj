@@ -123,6 +123,116 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &42915977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 42915979}
+  - component: {fileID: 42915978}
+  m_Layer: 0
+  m_Name: MainMenuAudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &42915978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42915977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e229f5df16357204eac7c7bc3483bd13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideMixerGroup: {fileID: 0}
+  sounds:
+  - name: Click
+    clip: {fileID: 8300000, guid: 19eced3ca29c0bd4696a8484349ae424, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 342295590231037942, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+  - name: InputChanged
+    clip: {fileID: 8300000, guid: 75a3cb3c8748e9649acb0c94c822b1cf, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1.21
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 342295590231037942, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+  - name: SoundEffectsTest
+    clip: {fileID: 8300000, guid: d4efbd752b8a97a4d8c9f5d69077084f, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: -2915394607602887089, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+  - name: MusicTest
+    clip: {fileID: 8300000, guid: a54ac6abc1d5e5b47b314cb3dea08b2f, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: -4160091114969696529, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+  - name: Flash
+    clip: {fileID: 8300000, guid: 16eb119fec8c34947b2d699e3f4a4870, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 342295590231037942, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+  - name: NoFlash
+    clip: {fileID: 8300000, guid: 5a7da30f6306ffb49847befb4dae5cbd, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 342295590231037942, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+--- !u!224 &42915979
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42915977}
+  m_LocalRotation: {x: 0.67299885, y: 0.21696225, z: -0.21696225, w: 0.67299885}
+  m_LocalPosition: {x: 0, y: 0, z: 3.497787}
+  m_LocalScale: {x: 0.0020000003, y: 0.0020000003, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 747052398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -955.3777, y: -493.13623}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &62517997
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +532,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 42915978}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 5
@@ -1284,7 +1394,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 42915978}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 5
@@ -7965,6 +8075,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 42915979}
   - {fileID: 1504318682}
   - {fileID: 192325442}
   - {fileID: 1851558583}
@@ -9409,7 +9520,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 42915978}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 5
@@ -22517,7 +22628,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 42915978}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 5
@@ -22957,6 +23068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2087049339}
   - component: {fileID: 2087049340}
+  - component: {fileID: 2087049341}
   m_Layer: 5
   m_Name: SoundSliders
   m_TagString: Untagged
@@ -23000,6 +23112,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 80836a7134546af469314acfa8c56f58, type: 2}
+--- !u!114 &2087049341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087049338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e229f5df16357204eac7c7bc3483bd13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideMixerGroup: {fileID: 0}
+  sounds:
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    volumeVariance: 0
+    pitch: 0
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &2087705185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7068bb649d11c3e4eb2dbcf25327b2d4,
