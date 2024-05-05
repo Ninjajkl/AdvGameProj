@@ -7,11 +7,14 @@ using Cinemachine;
 public class TitleSceneManager : MonoBehaviour
 {
     public PlayableDirector cutscene;
+    public GameObject directionalLight;
     public GameObject StartButton;
     public GameObject SettingsButton;
     public GameObject BedrockText;
     public GameObject VirtualCam1;
     public GameObject VirtualCam2;
+    public bool directionalLightOff;
+    Quaternion zeroRotation = Quaternion.Euler(Vector3.zero);
 
     [Header("Camera Shaking")]
     public CinemachineVirtualCamera VirtualCamera1ThugShaker;
@@ -20,7 +23,22 @@ public class TitleSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        directionalLight.SetActive(true);
         _cbmcp = VirtualCamera1ThugShaker.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        VirtualCam1.SetActive(true);
+        VirtualCam2.SetActive(false);
+        VirtualCamera1ThugShaker.gameObject.SetActive(false);
+        directionalLightOff = false;
+    }
+
+    private void Update() {
+        if(directionalLight.transform.rotation == zeroRotation) {
+            directionalLight.SetActive(false);
+        }
+        
+        if(directionalLightOff) {
+            directionalLight.transform.rotation = Quaternion.Slerp(directionalLight.transform.rotation, zeroRotation, Time.deltaTime * 5f);
+        }
     }
 
     public void HideMainUI()
@@ -64,13 +82,12 @@ public class TitleSceneManager : MonoBehaviour
         VirtualCam1.SetActive(false);
         VirtualCamera1ThugShaker.gameObject.SetActive(true);
         _cbmcp.m_AmplitudeGain = shakeIntensity;
+        directionalLightOff = true;
     }
 
     public void StopShake()
     {
-        _cbmcp.m_AmplitudeGain = 0f;
-        VirtualCam1.SetActive(true);
-        VirtualCamera1ThugShaker.gameObject.SetActive(false);
+        _cbmcp.m_AmplitudeGain = Mathf.MoveTowards(1f,0f,Time.deltaTime);
     }
 
     #endregion

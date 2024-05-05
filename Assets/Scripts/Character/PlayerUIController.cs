@@ -307,7 +307,7 @@ public class PlayerUIController : MonoBehaviour
     public void InitializeWorkbenchSystem()
     {
         workbenchSlot.index = 0;
-        workbenchSlot.drillText.text = "Stone Drill";
+        workbenchSlot.drillText.text = "Fixed Drill";
         workbenchSlot.drillImage.sprite = drillSprites[0];
         workbenchSlot.neededMaterialImage1.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[0].materialType];
         workbenchSlot.neededMaterialImage2.sprite = materialSprites[(int)workbenchObject.workbenchUpgrades[0].neededMaterials[1].materialType];

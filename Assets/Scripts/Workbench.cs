@@ -21,6 +21,7 @@ public class Workbench : Interactable
     }
 
     public WorkbenchUpgrade[] workbenchUpgrades;
+    public Drill drill;
 
     /*
      * Some gross hard-coded layer values
@@ -44,6 +45,8 @@ public class Workbench : Interactable
             gameManager.PlayerUI.workbenchSlot.index++;
             gameManager.PlayerUI.updateWorkbenchUI.Invoke(); // TODO: Remove if doing animation slide
             gameManager.PlayerUI.updateInventoryOnClick.Invoke();
+            drill.upgradeLevel++;
+            drill.updateDrillColor.Invoke();
             gameManager.ReduceRepairsLeft();
         }
     }
