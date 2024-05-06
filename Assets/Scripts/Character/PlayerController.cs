@@ -113,23 +113,27 @@ public class PlayerController : MonoBehaviour
         {
 
             float modification = Input.GetMouseButton(1) ? modiferStrengh : -modiferStrengh;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rangeHit))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rangeHit) &&
+                hit.collider.gameObject.name.Contains("Chunk"))
             {
-                if(!drillHitAudio.isPlaying && soundsEnabled) {
+                if (!drillHitAudio.isPlaying && soundsEnabled)
+                {
                     drillAudio.Stop();
                     drillHitAudio.Play();
                     miningParticles.SetActive(true);
                 }
                 chunkManager.ModifyChunkData(hit.point, sizeHit, modification, buildingMaterial, miningLevel);
 
-            } else {
-                if(!drillAudio.isPlaying && soundsEnabled) {
+            }
+            else
+            {
+                if (!drillAudio.isPlaying && soundsEnabled)
+                {
                     drillHitAudio.Stop();
                     miningParticles.SetActive(false);
                     drillAudio.Play();
                 }
             }
-            gameManager.PlayerUI.updateInventoryOnClick.Invoke();
         } else {
             drillAudio.Stop();
             drillHitAudio.Stop();
