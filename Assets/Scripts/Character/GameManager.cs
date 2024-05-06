@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     public RoomManager[] Rooms;
     public int ObjectsToRepair = 0;
     public PlayableDirector endSequence;
+    public LightSwitch lightSwitch;
 
     public override void Awake()
     {
@@ -39,6 +40,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ReduceRepairsLeft()
     {
+        lightSwitch.CheckIfReactorFixed();
         ObjectsToRepair--;
         if (ObjectsToRepair == 1)
         {

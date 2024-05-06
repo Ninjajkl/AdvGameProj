@@ -25,7 +25,7 @@ public class UpgradeableObject : Interactable
     [SerializeField]
     private GameObject fixedState;
 
-    private bool objectFixed = false;
+    public bool objectFixed = false;
 
     /*
      * Some gross hard-coded layer values

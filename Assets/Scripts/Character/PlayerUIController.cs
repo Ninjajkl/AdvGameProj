@@ -240,7 +240,7 @@ public class PlayerUIController : MonoBehaviour
 
             refinerySlots[i].refineButton.onClick.RemoveAllListeners();
             refinerySlots[i].refineButton.onClick.AddListener(() => refineryObject.Refine(refineryObject.refineryRecipies[index], multiple));
-            refinerySlots[i].refineButton.onClick.AddListener(() => playerHUDAudioManager.Play("Click"));
+            refinerySlots[i].refineButton.onClick.AddListener(() => playerHUDAudioManager.Play("RefineButton"));
 
             string instanRefinedMaterialText = $"{refineryObject.refineryRecipies[i].refinedMaterial}";
             instanRefinedMaterialText = instanRefinedMaterialText.Replace("_", " ");
@@ -326,7 +326,7 @@ public class PlayerUIController : MonoBehaviour
         workbenchSlot.neededMaterialText3.text = $"{workbenchObject.workbenchUpgrades[0].neededMaterials[2].amount} {neededMaterialText3}";
 
         workbenchSlot.upgradeButton.onClick.AddListener(() => workbenchObject.UpgradeDrill(workbenchObject.workbenchUpgrades[workbenchSlot.index]));
-        workbenchSlot.upgradeButton.onClick.AddListener(() => playerHUDAudioManager.Play("Click"));
+        workbenchSlot.upgradeButton.onClick.AddListener(() => playerHUDAudioManager.Play("UpgradeButton"));
         updateWorkbenchUI.AddListener(UpdateWorkbenchUIDynamic);
     }
 

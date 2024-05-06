@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 8224398531622387148}
   - component: {fileID: 6620865546130821897}
   m_Layer: 0
-  m_Name: PlayerHUDAudioManger
+  m_Name: PlayerHUDAudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,7 +640,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: InputChanged
-    clip: {fileID: 8300000, guid: 75a3cb3c8748e9649acb0c94c822b1cf, type: 3}
+    clip: {fileID: 8300000, guid: 5ee7cbbcab3fb2742ae0a466b1678779, type: 3}
     volume: 0.75
     volumeVariance: 0.1
     pitch: 1.21
@@ -670,7 +670,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Flash
-    clip: {fileID: 8300000, guid: 16eb119fec8c34947b2d699e3f4a4870, type: 3}
+    clip: {fileID: 8300000, guid: 80f40ffdf8028c24ebae6167c8a40390, type: 3}
     volume: 0.75
     volumeVariance: 0.1
     pitch: 1
@@ -680,7 +680,37 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: NoFlash
-    clip: {fileID: 8300000, guid: 5a7da30f6306ffb49847befb4dae5cbd, type: 3}
+    clip: {fileID: 8300000, guid: deb0671ba64bd4c4d950144f750f60d6, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 342295590231037942, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+  - name: RefineButton
+    clip: {fileID: 8300000, guid: 26a47bcdabcabd449ac7652033bd5141, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 342295590231037942, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+  - name: UpgradeButton
+    clip: {fileID: 8300000, guid: 980b81c173f4f504bae10631a6289efd, type: 3}
+    volume: 0.75
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 342295590231037942, guid: 80836a7134546af469314acfa8c56f58,
+      type: 2}
+    source: {fileID: 0}
+  - name: PaperCrush
+    clip: {fileID: 8300000, guid: f21520d95d1810943b78f00e03fad7bf, type: 3}
     volume: 0.75
     volumeVariance: 0.1
     pitch: 1
@@ -1363,8 +1393,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Music
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1763,7 +1793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4539774774013816381
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4175,6 +4205,9 @@ MonoBehaviour:
   buildingMaterial: 0
   jetpackAudio: {fileID: 106395170487879682}
   feetAudio: {fileID: 1174814250924253554}
+  drillAudio: {fileID: 0}
+  drillHitAudio: {fileID: 0}
+  miningParticles: {fileID: 0}
   flashlight: {fileID: 4096234904808915631}
   inventoryMenuOn: 0
   Inventory: 
@@ -4935,7 +4968,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Click
+          m_StringArgument: PaperCrush
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2333980419652328265}
@@ -5541,7 +5574,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Click
+          m_StringArgument: PaperCrush
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2333980419652328265}
@@ -5591,7 +5624,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 270}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4211447478824169728
 MonoBehaviour:
@@ -5734,8 +5767,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Master
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6075,7 +6108,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Click
+          m_StringArgument: PaperCrush
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2333980419652328265}
@@ -8608,8 +8641,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: UI
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9031,8 +9064,9 @@ MonoBehaviour:
   upgradeLevel: 0
   brokenDrillMat: {fileID: 2100000, guid: f1b962d305ec80e48bb7188e53a16319, type: 2}
   fixedDrillMat: {fileID: 2100000, guid: 1f667d9f639c49342839ecd5b4444eab, type: 2}
-  trans: {fileID: 3641006671115067349}
+  pivot: {fileID: 0}
   rend: {fileID: 6981660637118095523}
+  rotationSpeed: 1000
   updateDrillColor:
     m_PersistentCalls:
       m_Calls: []
@@ -9994,8 +10028,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sound Effects
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

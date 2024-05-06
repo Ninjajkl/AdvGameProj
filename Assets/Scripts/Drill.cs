@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,8 +9,9 @@ public class Drill : MonoBehaviour
     public int upgradeLevel;
     [SerializeField] private Material brokenDrillMat;
     [SerializeField] private Material fixedDrillMat;
-    [SerializeField] private Transform trans;
+    [SerializeField] private Transform pivot;
     [SerializeField] private Renderer rend;
+    [SerializeField] private float rotationSpeed = 1000f;
     public UnityEvent updateDrillColor;
 
     void Start()
@@ -32,11 +32,10 @@ public class Drill : MonoBehaviour
             updateDrillColor.Invoke();
         }
 
-        // Adds drill bit spin, doesn't work though :(
-        /*if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
-            trans.rotation.Set(trans.rotation.x, trans.rotation.y, trans.rotation.z + 1, trans.rotation.w);
-        }*/
+            RotateDrill();
+        }
     }
 
     public void UpdateDrillColor()
@@ -58,5 +57,9 @@ public class Drill : MonoBehaviour
                 rend.material.color = new Color(0.65f, 0.65f, 0.3f);
                 break;
         }
+    }
+
+    private void RotateDrill() {
+        pivot.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
     }
 }

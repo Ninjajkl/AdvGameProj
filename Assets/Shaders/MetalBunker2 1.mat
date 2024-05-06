@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BrokenMetalDrill
+  m_Name: MetalBunker2 1
   m_Shader: {fileID: -6465566751694194690, guid: 9cec9137dde19f54c939f14692d88e23,
     type: 3}
   m_Parent: {fileID: -876546973899608171, guid: 9cec9137dde19f54c939f14692d88e23,
@@ -27,14 +27,14 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Metallic: 0.5
+    - _Metallic: 1
     - _Multiple: 0.1
-    - _NoiseScalar: 121.83
-    - _Power: 5
+    - _NoiseScalar: 10000
+    - _Power: 0.8
     - _QueueControl: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.1
     m_Colors:
-    - _Color: {r: 0.4245283, g: 0.1456141, b: 0.062077247, a: 1}
+    - _Color: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2645288541702072491
 MonoBehaviour:

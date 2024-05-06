@@ -88,6 +88,7 @@ public class TitleSceneManager : MonoBehaviour
         VirtualCamera1ThugShaker.gameObject.SetActive(true);
         _cbmcp.m_AmplitudeGain = shakeIntensity;
         directionalLightOff = true;
+        amb_aud.Stop();
     }
 
     public void StopShake()
