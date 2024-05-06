@@ -296,6 +296,23 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.PlayerUI.ShowPauseMenu();
         }
+
+        if (Input.GetKey(KeyCode.G) && Input.GetKeyDown(KeyCode.H))
+        {
+            Inventory[0] = 999999;
+            Inventory[1] = 999999;
+            Inventory[2] = 999999;
+            Inventory[3] = 999999;
+            Inventory[4] = 999999;
+            Inventory[5] = 999999;
+            Inventory[6] = 999999;
+            Inventory[8] = 999999;
+            Inventory[9] = 999999;
+            Inventory[10] = 999999;
+            Inventory[11] = 999999;
+            Inventory[12] = 999999;
+            gameManager.PlayerUI.UpdateInventoryDynamic();
+        }
     }
 
     #endregion
