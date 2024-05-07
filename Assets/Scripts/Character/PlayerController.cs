@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
                     drillAudio.Play();
                 }
             }
+            gameManager.PlayerUI.updateInventoryOnClick.Invoke();
         } else {
             drillAudio.Stop();
             drillHitAudio.Stop();
