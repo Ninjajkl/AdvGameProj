@@ -25,13 +25,6 @@ public class Drill : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            upgradeLevel++;
-            updateDrillColor.Invoke();
-        }
-
         if (Input.GetMouseButton(0))
         {
             RotateDrill();
