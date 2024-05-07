@@ -3658,7 +3658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nearPlayer: 0
-  upgradeType: 0
+  upgradeType: 3
   upgradeLevel: 1
   neededMaterials:
   - materialType: 10
@@ -4578,7 +4578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nearPlayer: 0
-  upgradeType: 0
+  upgradeType: 2
   upgradeLevel: 1
   neededMaterials:
   - materialType: 12
@@ -8718,7 +8718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nearPlayer: 0
-  upgradeType: 0
+  upgradeType: 3
   upgradeLevel: 1
   neededMaterials:
   - materialType: 0
